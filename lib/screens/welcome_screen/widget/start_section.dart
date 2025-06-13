@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tasky/screens/home_screen/home_screen.dart';
 
 class StartSection extends StatelessWidget {
-  const StartSection({super.key});
+  StartSection({super.key});
+
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,8 @@ class StartSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: TextField(
+              controller: controller,
+              onChanged: (value) {},
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: "e.g. Sarah Khalid",
@@ -42,12 +46,20 @@ class StartSection extends StatelessWidget {
           SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => HomeScreen(),
-                ),
-              );
+              // print(controller.text);
+
+              if (controller.text.trim().isNotEmpty) {
+                controller.clear();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => HomeScreen(),
+                  ),
+                );
+                // controller.clear();
+              } else {
+                //  snackBar
+              }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF15B86C),
