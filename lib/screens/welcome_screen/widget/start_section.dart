@@ -63,7 +63,7 @@ class StartSection extends StatelessWidget {
                 if (_key.currentState?.validate() ?? false) {
                   final pref = await SharedPreferences.getInstance();
                   await pref.setString("username", controller.value.text);
-                  String? username = pref.getString("username");
+                  // String? username = pref.getString("username");
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
