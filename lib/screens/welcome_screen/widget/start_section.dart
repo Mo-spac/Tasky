@@ -61,7 +61,6 @@ class StartSection extends StatelessWidget {
                 // print(controller.text);
                 _key.currentState?.validate();
                 if (controller.text.trim().isNotEmpty) {
-                  controller.clear();
                   Navigator.push(
                     context,
                     MaterialPageRoute(

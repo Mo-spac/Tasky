@@ -22,7 +22,7 @@ class WelcomeSection extends StatelessWidget {
                 ),
               ),
               SvgPicture.asset(
-                "assets/images/waving-hand-medium-light-skin-tone.svg",
+                "assets/icons/waving-hand-medium-light-skin-tone.svg",
                 height: 28,
                 width: 28,
               ),
