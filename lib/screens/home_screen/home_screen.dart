@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tasky/screens/add_task/add_task.dart';
+import 'package:tasky/screens/add_task/add_task_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,7 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (BuildContext context) => AddTask()),
+              MaterialPageRoute(
+                builder: (BuildContext context) => AddTaskScreen(),
+              ),
             );
           },
           backgroundColor: Color(0xFF15B86C),
