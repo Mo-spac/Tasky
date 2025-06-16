@@ -30,6 +30,28 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF181818),
+      floatingActionButton: SizedBox(
+        width: 167,
+        height: 40,
+        child: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => AddTask()),
+            );
+          },
+          backgroundColor: Color(0xFF15B86C),
+          foregroundColor: Color(0xFFFFFCFC),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          label: Text(
+            "Add New Task",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          ),
+          icon: Icon(Icons.add),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -62,30 +84,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 trailing: SvgPicture.asset("assets/icons/Light.svg"),
               ),
-              Spacer(),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => AddTask(),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF15B86C),
-                    foregroundColor: Color(0xFFFFFCFC),
-                    fixedSize: Size(167, 40),
-                  ),
-                  icon: Icon(Icons.add),
-                  label: Text(
-                    "Add New Task",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
+
+              //   Spacer(),
+              //   Align(
+              //     alignment: Alignment.bottomRight,
+              //     child: ElevatedButton.icon(
+              //       onPressed: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (BuildContext context) => AddTask(),
+              //           ),
+              //         );
+              //       },
+              //       style: ElevatedButton.styleFrom(
+              //         backgroundColor: Color(0xFF15B86C),
+              //         foregroundColor: Color(0xFFFFFCFC),
+              //         fixedSize: Size(167, 40),
+              //       ),
+              //       icon: Icon(Icons.add),
+              //       label: Text(
+              //         "Add New Task",
+              //         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              //       ),
+              //     ),
+              //   ),
             ],
           ),
         ),
