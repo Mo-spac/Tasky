@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/screens/home_screen/home_screen.dart';
 
-class AddTaskScreen extends StatelessWidget {
-  AddTaskScreen({super.key});
+class AddTaskScreen extends StatefulWidget {
+  const AddTaskScreen({super.key});
 
+  @override
+  State<AddTaskScreen> createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
   // TO DO : Dispose this controlers
   final TextEditingController taskNameController = TextEditingController();
+
   final TextEditingController taskDescriptionController =
       TextEditingController();
+
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
+  bool isHighPriority = true;
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +112,29 @@ class AddTaskScreen extends StatelessWidget {
                   ),
                 ),
                 cursorColor: Colors.white,
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "High Priority",
+                    style: TextStyle(
+                      color: Color(0xFFFFFCFC),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Switch(
+                    value: isHighPriority,
+                    onChanged: (bool value) {
+                      setState(() {
+                        isHighPriority = value;
+                      });
+                    },
+                    activeTrackColor: Color(0xFF15B86C),
+                  ),
+                ],
               ),
               Spacer(),
               ElevatedButton.icon(
