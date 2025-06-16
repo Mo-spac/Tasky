@@ -84,7 +84,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 trailing: SvgPicture.asset("assets/icons/Light.svg"),
               ),
-
+              SizedBox(height: 16),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Yuhuu ,Your work Is ",
+                  style: TextStyle(
+                    color: Color(0xFFFFFCFC),
+                    fontSize: 32,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    "almost done ! ",
+                    style: TextStyle(
+                      color: Color(0xFFFFFCFC),
+                      fontSize: 32,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SvgPicture.asset(
+                    "assets/icons/waving-hand-medium-light-skin-tone.svg",
+                  ),
+                ],
+              ),
               //   Spacer(),
               //   Align(
               //     alignment: Alignment.bottomRight,
