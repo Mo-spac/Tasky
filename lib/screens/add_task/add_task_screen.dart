@@ -52,7 +52,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               SizedBox(height: 8),
               TextFormField(
                 controller: taskNameController,
-                validator: (value) {
+                validator: (String? value) {
                   if (value?.trim().isEmpty ?? false) {
                     return "Please, Enter your Task's name";
                   }
@@ -88,7 +88,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               SizedBox(height: 8),
               TextFormField(
                 controller: taskDescriptionController,
-                validator: (value) {
+                validator: (String? value) {
                   if (value?.trim().isEmpty ?? false) {
                     return "Please, Enter your Task's description";
                   }
@@ -139,12 +139,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               Spacer(),
               ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => HomeScreen(),
-                    ),
-                  );
+                  if (_key.currentState?.validate() ?? false) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => HomeScreen(),
+                      ),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF15B86C),
