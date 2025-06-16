@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/screens/add_task/add_task.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -60,6 +61,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 trailing: SvgPicture.asset("assets/icons/Light.svg"),
+              ),
+              Spacer(),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => AddTask(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF15B86C),
+                    foregroundColor: Color(0xFFFFFCFC),
+                    fixedSize: Size(167, 40),
+                  ),
+                  icon: Icon(Icons.add),
+                  label: Text(
+                    "Add New Task",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                ),
               ),
             ],
           ),
