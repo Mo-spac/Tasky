@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/screens/home_screen/home_screen.dart';
 
 class StartSection extends StatelessWidget {
@@ -57,11 +58,13 @@ class StartSection extends StatelessWidget {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                // print(controller.text);
-                _key.currentState?.validate();
-                if (controller.text.trim().isNotEmpty) {
-                  Navigator.push(
+              onPressed: () async {
+                // print(controller.value.text);
+                if (_key.currentState?.validate() ?? false) {
+                  final pref = await SharedPreferences.getInstance();
+                  await pref.setString("username", controller.value.text);
+                  String? username = pref.getString("username");
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (BuildContext context) => HomeScreen(),
@@ -69,7 +72,7 @@ class StartSection extends StatelessWidget {
                   );
                   // controller.clear();
                 } else {
-                  //  snackBar
+                  //  snackBar TO DO
                 }
               },
               style: ElevatedButton.styleFrom(

@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String? username;
+  @override
+  void initState() {
+    super.initState();
+    _loadUsername();
+  }
+
+  void _loadUsername() async {
+    final pref = await SharedPreferences.getInstance();
+    setState(() {
+      username = pref.getString("username");
+    });
+    print("Usernameee = $username");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +36,6 @@ class HomeScreen extends StatelessWidget {
             children: [
               ListTile(
                 leading: CircleAvatar(
-                  // backgroundColor: Colors.grey[200],
                   backgroundColor: Colors.transparent,
                   child: Image.asset(
                     "assets/images/Thumbnail.png",
@@ -24,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 title: Text(
-                  "Good Evening ,Usama",
+                  "Good Evening , $username",
                   style: TextStyle(
                     color: Color(0xffFFFCFC),
                     fontSize: 16,
