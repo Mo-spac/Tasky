@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/screens/home_screen/home_screen.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -60,8 +64,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 },
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  hintText:
-                      "Finish onboarding UI and hand off to devs by Thursday.",
+                  hintText: "Finish UI design for login screen",
                   filled: true,
                   fillColor: Color(0xff282828),
                   hintStyle: TextStyle(
@@ -138,14 +141,36 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               Spacer(),
               ElevatedButton.icon(
-                onPressed: () {
+                onPressed: () async {
                   if (_key.currentState?.validate() ?? false) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => HomeScreen(),
-                      ),
-                    );
+                    Map<String, dynamic> task = {
+                      "taskName": taskNameController.text,
+                      "taskDescription": taskDescriptionController.text,
+                      "isHighPriority": isHighPriority,
+                    };
+                    final pref = await SharedPreferences.getInstance();
+                    final taskEncode = jsonEncode(task);
+                    await pref.setString("task", taskEncode);
+
+                    log("task: $task".toString());
+                    log("taskEncode: $taskEncode".toString());
+
+                    final finalTask = pref.getString("task");
+
+                    log("finalTask: $finalTask".toString());
+
+                    final taskAfterDecode =
+                        jsonDecode(finalTask ?? "") as Map<String, dynamic>;
+
+                    log("taskAfterDecode: $taskAfterDecode".toString());
+                    log(taskAfterDecode["taskName"].toString());
+
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) => HomeScreen(),
+                    //   ),
+                    // );
                   }
                 },
                 style: ElevatedButton.styleFrom(
