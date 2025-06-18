@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/add_task/add_task_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String? username;
-  List<dynamic> task = [];
+  List<TaskModel> task = [];
   @override
   void initState() {
     super.initState();
@@ -28,16 +29,31 @@ class _HomeScreenState extends State<HomeScreen> {
     final finalTask = pref.getString("tasks");
 
     log("finalTask: $finalTask".toString());
+    if (finalTask != null) {
+      final taskAfterDecode = jsonDecode(finalTask) as List<dynamic>;
 
-    final taskAfterDecode = jsonDecode(finalTask ?? "") as List<dynamic>;
+      log("taskAfterDecode: $taskAfterDecode".toString());
+      log("******************");
+      log(taskAfterDecode[0]["taskName"].toString());
 
-    log("taskAfterDecode: $taskAfterDecode".toString());
-    log("******************");
-    log(taskAfterDecode[0]["taskName"].toString());
+      final tasks =
+          taskAfterDecode.map((e) {
+            return TaskModel(
+              taskName: e["taskName"],
+              taskDescription: e["taskDescription"],
+              isHighPriority: e["isHighPriority"],
+            );
+          }).toList();
 
-    setState(() {
-      task = taskAfterDecode;
-    });
+      log("tasks : $tasks");
+
+      setState(() {
+        // task = taskAfterDecode;
+        task = tasks;
+      });
+      // log("task : ${task[0]["taskName"]}");
+      log("task : ${task[0].taskName}");
+    }
   }
 
   void _loadUsername() async {
@@ -136,11 +152,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
 
-              // Text("${task["taskName"]}", style: TextStyle(color: Colors.red)),
-              // Text(
-              //   task["taskDescription"],
-              //   style: TextStyle(color: Colors.red),
-              // ),
+              Text(task[0].taskName, style: TextStyle(color: Colors.red)),
+              Text(
+                task[0].taskDescription,
+                style: TextStyle(color: Colors.red),
+              ),
+              Text(
+                "${task[0].isHighPriority}",
+                style: TextStyle(color: Colors.red),
+              ),
+
               //   Spacer(),
               //   Align(
               //     alignment: Alignment.bottomRight,
