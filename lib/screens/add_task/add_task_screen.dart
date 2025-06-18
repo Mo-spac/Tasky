@@ -155,15 +155,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     log("task: $task".toString());
                     log("taskEncode: $taskEncode".toString());
 
-                    final finalTask = pref.getString("task");
+                    // final finalTask = pref.getString("task");
 
-                    log("finalTask: $finalTask".toString());
+                    // log("finalTask: $finalTask".toString());
 
-                    final taskAfterDecode =
-                        jsonDecode(finalTask ?? "") as Map<String, dynamic>;
+                    // final taskAfterDecode =
+                    //     jsonDecode(finalTask ?? "") as Map<String, dynamic>;
 
-                    log("taskAfterDecode: $taskAfterDecode".toString());
-                    log(taskAfterDecode["taskName"].toString());
+                    // log("taskAfterDecode: $taskAfterDecode".toString());
+                    // log(taskAfterDecode["taskName"].toString());
 
                     // Navigator.push(
                     //   context,

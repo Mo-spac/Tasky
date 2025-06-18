@@ -15,10 +15,28 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String? username;
+  Map<String, dynamic> task = {};
   @override
   void initState() {
     super.initState();
     _loadUsername();
+    _loadTask();
+  }
+
+  void _loadTask() async {
+    final pref = await SharedPreferences.getInstance();
+    final finalTask = pref.getString("task");
+
+    log("finalTask: $finalTask".toString());
+
+    final taskAfterDecode = jsonDecode(finalTask ?? "") as Map<String, dynamic>;
+
+    log("taskAfterDecode: $taskAfterDecode".toString());
+    log(taskAfterDecode["taskName"].toString());
+
+    setState(() {
+      task = taskAfterDecode;
+    });
   }
 
   void _loadUsername() async {
@@ -117,6 +135,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
 
+              Text("${task["taskName"]}", style: TextStyle(color: Colors.red)),
+              Text(
+                task["taskDescription"],
+                style: TextStyle(color: Colors.red),
+              ),
               //   Spacer(),
               //   Align(
               //     alignment: Alignment.bottomRight,
