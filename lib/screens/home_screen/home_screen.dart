@@ -36,20 +36,21 @@ class _HomeScreenState extends State<HomeScreen> {
       log("******************");
       log(taskAfterDecode[0]["taskName"].toString());
 
-      final tasks =
-          taskAfterDecode.map((e) {
-            return TaskModel(
-              taskName: e["taskName"],
-              taskDescription: e["taskDescription"],
-              isHighPriority: e["isHighPriority"],
-            );
-          }).toList();
+      // final tasks =
+      //     taskAfterDecode.map((e) {
+      //       // return TaskModel(
+      //       //   taskName: e["taskName"],
+      //       //   taskDescription: e["taskDescription"],
+      //       //   isHighPriority: e["isHighPriority"],
+      //       // );
+      //       return TaskModel.fromJson(e);
+      //     }).toList();
 
-      log("tasks : $tasks");
+      // log("tasks : $tasks");
 
       setState(() {
         // task = taskAfterDecode;
-        task = tasks;
+        task = taskAfterDecode.map((e) => TaskModel.fromJson(e)).toList();
       });
       // log("task : ${task[0]["taskName"]}");
       log("task : ${task[0].taskName}");
@@ -152,15 +153,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
 
-              Text(task[0].taskName, style: TextStyle(color: Colors.red)),
-              Text(
-                task[0].taskDescription,
-                style: TextStyle(color: Colors.red),
-              ),
-              Text(
-                "${task[0].isHighPriority}",
-                style: TextStyle(color: Colors.red),
-              ),
+              // Text(task[1].taskName, style: TextStyle(color: Colors.red)),
+              // Text(
+              //   task[1].taskDescription,
+              //   style: TextStyle(color: Colors.red),
+              // ),
+              // Text(
+              //   "${task[1].isHighPriority}",
+              //   style: TextStyle(color: Colors.red),
+              // ),
 
               //   Spacer(),
               //   Align(

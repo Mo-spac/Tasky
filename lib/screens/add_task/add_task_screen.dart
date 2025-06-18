@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/home_screen/home_screen.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -143,11 +144,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ElevatedButton.icon(
                 onPressed: () async {
                   if (_key.currentState?.validate() ?? false) {
-                    Map<String, dynamic> task = {
-                      "taskName": taskNameController.text,
-                      "taskDescription": taskDescriptionController.text,
-                      "isHighPriority": isHighPriority,
-                    };
+                    TaskModel taskModel = TaskModel(
+                      taskName: taskNameController.text,
+                      taskDescription: taskDescriptionController.text,
+                      isHighPriority: isHighPriority,
+                    );
+
+                    // Map<String, dynamic> task = {
+                    //   "taskName": taskNameController.text,
+                    //   "taskDescription": taskDescriptionController.text,
+                    //   "isHighPriority": isHighPriority,
+                    // };
+
                     final pref = await SharedPreferences.getInstance();
                     final taskJson = pref.getString("tasks");
                     log(taskJson.toString());
@@ -156,7 +164,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       listTasks = jsonDecode(taskJson);
                     }
                     log("List Tasks before added : $listTasks");
-                    listTasks.add(task);
+                    // listTasks.add(task);
+                    listTasks.add(taskModel.toMap());
                     log("List Tasks after added : $listTasks");
                     final tasksEncode = jsonEncode(listTasks);
                     await pref.setString("tasks", tasksEncode);
