@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String? username;
-  Map<String, dynamic> task = {};
+  List<dynamic> task = [];
   @override
   void initState() {
     super.initState();
@@ -25,14 +25,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _loadTask() async {
     final pref = await SharedPreferences.getInstance();
-    final finalTask = pref.getString("task");
+    final finalTask = pref.getString("tasks");
 
     log("finalTask: $finalTask".toString());
 
-    final taskAfterDecode = jsonDecode(finalTask ?? "") as Map<String, dynamic>;
+    final taskAfterDecode = jsonDecode(finalTask ?? "") as List<dynamic>;
 
     log("taskAfterDecode: $taskAfterDecode".toString());
-    log(taskAfterDecode["taskName"].toString());
+    log("******************");
+    log(taskAfterDecode[0]["taskName"].toString());
 
     setState(() {
       task = taskAfterDecode;
@@ -135,11 +136,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
 
-              Text("${task["taskName"]}", style: TextStyle(color: Colors.red)),
-              Text(
-                task["taskDescription"],
-                style: TextStyle(color: Colors.red),
-              ),
+              // Text("${task["taskName"]}", style: TextStyle(color: Colors.red)),
+              // Text(
+              //   task["taskDescription"],
+              //   style: TextStyle(color: Colors.red),
+              // ),
               //   Spacer(),
               //   Align(
               //     alignment: Alignment.bottomRight,

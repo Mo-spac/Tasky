@@ -149,11 +149,24 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       "isHighPriority": isHighPriority,
                     };
                     final pref = await SharedPreferences.getInstance();
-                    final taskEncode = jsonEncode(task);
-                    await pref.setString("task", taskEncode);
+                    final taskJson = pref.getString("tasks");
+                    log(taskJson.toString());
+                    List<dynamic> listTasks = [];
+                    if (taskJson != null) {
+                      listTasks = jsonDecode(taskJson);
+                    }
+                    log("List Tasks before added : $listTasks");
+                    listTasks.add(task);
+                    log("List Tasks after added : $listTasks");
+                    final tasksEncode = jsonEncode(listTasks);
+                    await pref.setString("tasks", tasksEncode);
 
-                    log("task: $task".toString());
-                    log("taskEncode: $taskEncode".toString());
+                    // ******************** One Task **************************
+                    // final taskEncode = jsonEncode(task);
+                    // await pref.setString("task", taskEncode);
+
+                    // log("task: $task".toString());
+                    // log("taskEncode: $taskEncode".toString());
 
                     // final finalTask = pref.getString("task");
 
