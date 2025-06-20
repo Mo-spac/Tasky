@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     CompleteTasksScreen(),
     ProfileScreen(),
   ];
-  Widget screen = HomeScreen();
+  Widget _currentScreen = HomeScreen();
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +30,16 @@ class _MainScreenState extends State<MainScreen> {
         onTap: (int? index) {
           log(index.toString());
           setState(() {
-            if (index == 0) {
-              screen = HomeScreen();
-            } else if (index == 1) {
-              screen = TodoScreen();
-            } else if (index == 2) {
-              screen = CompleteTasksScreen();
-            } else {
-              screen = ProfileScreen();
-            }
+            // if (index == 0) {
+            //   screen = HomeScreen();
+            // } else if (index == 1) {
+            //   screen = TodoScreen();
+            // } else if (index == 2) {
+            //   screen = CompleteTasksScreen();
+            // } else {
+            //   screen = ProfileScreen();
+            // }
+            _currentScreen = screens[index ?? 0];
           });
         },
         backgroundColor: Color(0xFF181818),
@@ -64,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: screen,
+      body: _currentScreen,
     );
   }
 }
