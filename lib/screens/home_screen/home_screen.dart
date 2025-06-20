@@ -192,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(
                               color:
                                   tasks[index].isDone
-                                      ? Color(0xffC6C6C6)
+                                      ? Color(0xffA0A0A0)
                                       : Color(0xffFFFCFC),
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
@@ -201,7 +201,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ? TextDecoration.lineThrough
                                       : TextDecoration.none,
                               decorationColor: Color(0xffC6C6C6),
+                              overflow: TextOverflow.ellipsis,
                             ),
+                            maxLines: 1,
                           ),
                           subtitle:
                               tasks[index].isDone
@@ -212,9 +214,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Color(0xffC6C6C6),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
+                                    maxLines: 2,
                                   ),
-                          // trailing: Icon(Icons.),
+                          trailing: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.more_vert,
+                              color:
+                                  tasks[index].isDone
+                                      ? Color(0xffA0A0A0)
+                                      : Color(0xffC6C6C6),
+                            ),
+                          ),
                         ),
                       ),
                 ),
