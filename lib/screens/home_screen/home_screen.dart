@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String? username;
-  List<TaskModel> task = [];
+  List<TaskModel> tasks = [];
   @override
   void initState() {
     super.initState();
@@ -50,10 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
       setState(() {
         // task = taskAfterDecode;
-        task = taskAfterDecode.map((e) => TaskModel.fromJson(e)).toList();
+        tasks = taskAfterDecode.map((e) => TaskModel.fromJson(e)).toList();
       });
       // log("task : ${task[0]["taskName"]}");
-      log("task : ${task[0].taskName}");
+      log("task : ${tasks[0].taskName}");
     }
   }
 
@@ -63,6 +63,18 @@ class _HomeScreenState extends State<HomeScreen> {
       username = pref.getString("username");
     });
     print("Usernameee = $username");
+  }
+
+  Future<void> _saveTasksToPrefs() async {
+    try {
+      final pref = await SharedPreferences.getInstance();
+      final updatedTasks = tasks.map((e) => e.toMap()).toList();
+      final valueEncode = jsonEncode(updatedTasks);
+      await pref.setString("tasks", valueEncode);
+      log("✅ Tasks saved successfully.");
+    } catch (e) {
+      log("❌ Error saving tasks: $e");
+    }
   }
 
   @override
@@ -153,15 +165,78 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
 
-              // Text(task[1].taskName, style: TextStyle(color: Colors.red)),
-              // Text(
-              //   task[1].taskDescription,
-              //   style: TextStyle(color: Colors.red),
-              // ),
-              // Text(
-              //   "${task[1].isHighPriority}",
-              //   style: TextStyle(color: Colors.red),
-              // ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: tasks.length,
+                  itemBuilder:
+                      (BuildContext context, int index) => Card(
+                        margin: EdgeInsets.only(top: 8.0),
+                        color: Color(0xff282828),
+                        child: ListTile(
+                          leading: Checkbox(
+                            value: tasks[index].isDone,
+                            onChanged: (value) async {
+                              setState(() {
+                                tasks[index].isDone = value ?? false;
+                              });
+                              await _saveTasksToPrefs();
+                            },
+                            activeColor: Color(0xFF15B86C),
+                            checkColor: Color(0xffFFFCFC),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                          title: Text(
+                            tasks[index].taskName,
+                            style: TextStyle(
+                              color:
+                                  tasks[index].isDone
+                                      ? Color(0xffC6C6C6)
+                                      : Color(0xffFFFCFC),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              decoration:
+                                  tasks[index].isDone
+                                      ? TextDecoration.lineThrough
+                                      : TextDecoration.none,
+                              decorationColor: Color(0xffC6C6C6),
+                            ),
+                          ),
+                          subtitle:
+                              tasks[index].isDone
+                                  ? null
+                                  : Text(
+                                    tasks[index].taskDescription,
+                                    style: TextStyle(
+                                      color: Color(0xffC6C6C6),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                          // trailing: Icon(Icons.),
+                        ),
+                      ),
+                ),
+              ),
+
+              if (tasks.isNotEmpty)
+                Column(
+                  children: [
+                    Text(
+                      tasks[0].taskName,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    Text(
+                      tasks[0].taskDescription,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    Text(
+                      "${tasks[0].isHighPriority}",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ],
+                ),
 
               //   Spacer(),
               //   Align(
