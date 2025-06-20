@@ -88,31 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Color(0xFF181818),
 
-      floatingActionButton: SizedBox(
-        width: 167,
-        height: 40,
-        child: FloatingActionButton.extended(
-          onPressed: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => AddTaskScreen(),
-              ),
-            );
-            _loadTask();
-          },
-          backgroundColor: Color(0xFF15B86C),
-          foregroundColor: Color(0xFFFFFCFC),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          label: Text(
-            "Add New Task",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-          ),
-          icon: Icon(Icons.add),
-        ),
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -305,6 +280,36 @@ class _HomeScreenState extends State<HomeScreen> {
               //   ),
             ],
           ),
+        ),
+      ),
+
+      floatingActionButton: SizedBox(
+        width: 167,
+        height: 40,
+        child: FloatingActionButton.extended(
+          onPressed: () async {
+            final bool? result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => AddTaskScreen(),
+              ),
+            );
+            log(result.toString());
+            print(result);
+            if (result != null && result == true) {
+              _loadTask();
+            }
+          },
+          backgroundColor: Color(0xFF15B86C),
+          foregroundColor: Color(0xFFFFFCFC),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          label: Text(
+            "Add New Task",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          ),
+          icon: Icon(Icons.add),
         ),
       ),
     );

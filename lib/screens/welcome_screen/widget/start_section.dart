@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/screens/home_screen/home_screen.dart';
+import 'package:tasky/screens/main_screen/main_screen.dart';
 
 class StartSection extends StatelessWidget {
   StartSection({super.key});
@@ -67,7 +68,7 @@ class StartSection extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (BuildContext context) => HomeScreen(),
+                      builder: (BuildContext context) => MainScreen(),
                     ),
                   );
                   // controller.clear();

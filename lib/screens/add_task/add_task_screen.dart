@@ -187,7 +187,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     // log("taskAfterDecode: $taskAfterDecode".toString());
                     // log(taskAfterDecode["taskName"].toString());
 
-                    Navigator.pop(context);
+                    Navigator.of(context).pop(true);
                   }
                 },
                 style: ElevatedButton.styleFrom(
