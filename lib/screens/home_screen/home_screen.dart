@@ -87,7 +87,30 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF181818),
-
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFF181818),
+        type: BottomNavigationBarType.fixed,
+        unselectedItemColor: Color(0xffC6C6C6),
+        selectedItemColor: Color(0xff15B86C),
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset("assets/images/home.svg"),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset("assets/images/todo.svg"),
+            label: "ToDo",
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset("assets/images/completed.svg"),
+            label: "completed",
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset("assets/images/profile.svg"),
+            label: "profile",
+          ),
+        ],
+      ),
       floatingActionButton: SizedBox(
         width: 167,
         height: 40,
