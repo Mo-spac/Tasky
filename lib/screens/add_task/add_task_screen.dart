@@ -27,7 +27,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF181818),
       appBar: AppBar(
         backgroundColor: Color(0xFF181818),
         centerTitle: false,

@@ -24,7 +24,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Tasky',
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: Color(0xFF181818),
+      ),
       home: username == null ? WelcomeScreen() : MainScreen(),
     );
   }

@@ -56,11 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         // task = taskAfterDecode;
         tasks = taskAfterDecode.map((e) => TaskModel.fromJson(e)).toList();
-        isLoading = false;
       });
       // log("task : ${task[0]["taskName"]}");
       log("task : ${tasks[0].taskName}");
     }
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void _loadUsername() async {
@@ -86,8 +89,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF181818),
-
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -169,6 +170,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Color(0xffFFFCFC),
                           ),
                         )
+                        : tasks.isEmpty
+                        ? Center(
+                          child: Text(
+                            "No Tasks",
+                            style: TextStyle(
+                              color: Color(0xffFFFCFC),
+                              fontSize: 24,
+                            ),
+                          ),
+                        )
                         : ListView.builder(
                           padding: EdgeInsets.only(bottom: 30),
                           itemCount: tasks.length,
@@ -208,19 +219,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     maxLines: 1,
                                   ),
+
                                   subtitle:
-                                      tasks[index].isDone
-                                          ? null
-                                          : Text(
+                                      tasks[index].taskDescription.isNotEmpty
+                                          ? Text(
                                             tasks[index].taskDescription,
                                             style: TextStyle(
                                               color: Color(0xffC6C6C6),
                                               fontSize: 14,
                                               fontWeight: FontWeight.w400,
+                                              decoration:
+                                                  tasks[index].isDone
+                                                      ? TextDecoration
+                                                          .lineThrough
+                                                      : TextDecoration.none,
+                                              decorationColor: Color(
+                                                0xffC6C6C6,
+                                              ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                             maxLines: 2,
-                                          ),
+                                          )
+                                          : null,
                                   trailing: IconButton(
                                     onPressed: () {},
                                     icon: Icon(

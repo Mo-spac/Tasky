@@ -9,7 +9,6 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF181818),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
