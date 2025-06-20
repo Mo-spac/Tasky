@@ -21,25 +21,18 @@ class _MainScreenState extends State<MainScreen> {
     CompleteTasksScreen(),
     ProfileScreen(),
   ];
-  Widget _currentScreen = HomeScreen();
+
+  int _currentScreen = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentScreen,
         onTap: (int? index) {
           log(index.toString());
           setState(() {
-            // if (index == 0) {
-            //   screen = HomeScreen();
-            // } else if (index == 1) {
-            //   screen = TodoScreen();
-            // } else if (index == 2) {
-            //   screen = CompleteTasksScreen();
-            // } else {
-            //   screen = ProfileScreen();
-            // }
-            _currentScreen = screens[index ?? 0];
+            _currentScreen = index ?? 0;
           });
         },
         backgroundColor: Color(0xFF181818),
@@ -65,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: _currentScreen,
+      body: screens[_currentScreen],
     );
   }
 }
