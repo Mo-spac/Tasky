@@ -92,12 +92,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               SizedBox(height: 8),
               TextFormField(
                 controller: taskDescriptionController,
-                validator: (String? value) {
-                  if (value?.trim().isEmpty ?? false) {
-                    return "Please, Enter your Task's description";
-                  }
-                  return null;
-                },
+                // validator: (String? value) {
+                //   if (value?.trim().isEmpty ?? false) {
+                //     return "Please, Enter your Task's description";
+                //   }
+                //   return null;
+                // },
                 style: TextStyle(color: Colors.white),
                 maxLines: 5,
                 decoration: InputDecoration(
@@ -187,12 +187,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     // log("taskAfterDecode: $taskAfterDecode".toString());
                     // log(taskAfterDecode["taskName"].toString());
 
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) => HomeScreen(),
-                    //   ),
-                    // );
+                    Navigator.pop(context);
                   }
                 },
                 style: ElevatedButton.styleFrom(
