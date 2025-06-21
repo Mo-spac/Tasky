@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/models/task_model.dart';
-import 'package:tasky/screens/home_screen/home_screen.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
@@ -27,17 +26,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF181818),
-        centerTitle: false,
-        title: Text("New Task"),
-        titleTextStyle: TextStyle(
-          color: Color(0xFFFFFCFC),
-          fontSize: 20,
-          fontWeight: FontWeight.w400,
-        ),
-        iconTheme: IconThemeData(color: Color(0xFFFFFCFC)),
-      ),
+      appBar: AppBar(title: Text("New Task")),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Form(

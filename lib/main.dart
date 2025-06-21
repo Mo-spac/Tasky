@@ -27,6 +27,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: Color(0xFF181818),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xFF181818),
+          centerTitle: false,
+          titleTextStyle: TextStyle(
+            color: Color(0xFFFFFCFC),
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+          ),
+          iconTheme: IconThemeData(color: Color(0xFFFFFCFC)),
+        ),
       ),
       home: username == null ? WelcomeScreen() : MainScreen(),
     );
