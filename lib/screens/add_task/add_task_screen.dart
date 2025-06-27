@@ -132,31 +132,36 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ElevatedButton.icon(
                 onPressed: () async {
                   if (_key.currentState?.validate() ?? false) {
+                    final pref = await SharedPreferences.getInstance();
+                    final taskJson = pref.getString("tasks");
+                    log(taskJson.toString());
+
+                    List<dynamic> listTasks = [];
+
+                    if (taskJson != null) {
+                      listTasks = jsonDecode(taskJson);
+                    }
+
                     TaskModel taskModel = TaskModel(
+                      id: listTasks.length + 1,
                       taskName: taskNameController.text,
                       taskDescription: taskDescriptionController.text,
                       isHighPriority: isHighPriority,
                     );
+
+                    log("List Tasks before added : $listTasks");
+                    // listTasks.add(task);
+                    listTasks.add(taskModel.toMap());
+                    log("List Tasks after added : $listTasks");
+
+                    final tasksEncode = jsonEncode(listTasks);
+                    await pref.setString("tasks", tasksEncode);
 
                     // Map<String, dynamic> task = {
                     //   "taskName": taskNameController.text,
                     //   "taskDescription": taskDescriptionController.text,
                     //   "isHighPriority": isHighPriority,d
                     // };
-
-                    final pref = await SharedPreferences.getInstance();
-                    final taskJson = pref.getString("tasks");
-                    log(taskJson.toString());
-                    List<dynamic> listTasks = [];
-                    if (taskJson != null) {
-                      listTasks = jsonDecode(taskJson);
-                    }
-                    log("List Tasks before added : $listTasks");
-                    // listTasks.add(task);
-                    listTasks.add(taskModel.toMap());
-                    log("List Tasks after added : $listTasks");
-                    final tasksEncode = jsonEncode(listTasks);
-                    await pref.setString("tasks", tasksEncode);
 
                     // ******************** One Task **************************
                     // final taskEncode = jsonEncode(task);

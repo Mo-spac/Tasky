@@ -14,7 +14,7 @@ class TodoTasksScreen extends StatefulWidget {
 }
 
 class _TodoTasksScreenState extends State<TodoTasksScreen> {
-  List<TaskModel> tasks = [];
+  List<TaskModel> todoTasks = [];
   bool isLoading = false;
 
   @override
@@ -35,7 +35,7 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
 
       setState(() {
         // task = taskAfterDecode;
-        tasks =
+        todoTasks =
             taskAfterDecode
                 .map((element) => TaskModel.fromJson(element))
                 .where((element) => element.isDone == false)
@@ -51,13 +51,37 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
     });
   }
 
-  Future<void> _saveTasksToPrefs() async {
+  Future<void> _saveTasksToPrefs(int? index) async {
     try {
+      //  if (index == null) return;
       final pref = await SharedPreferences.getInstance();
-      final updatedTasks = tasks.map((e) => e.toMap()).toList();
-      final valueEncode = jsonEncode(updatedTasks);
-      await pref.setString("tasks", valueEncode);
-      log("✅ Tasks saved successfully.");
+      // final updatedTasks = tasks.map((e) => e.toMap()).toList();
+      final allData = pref.getString("tasks");
+
+      if (allData != null) {
+        List<TaskModel> allDataList =
+            (jsonDecode(allData) as List)
+                .map((e) => TaskModel.fromJson(e))
+                .toList();
+        final int newIndex = allDataList.indexWhere(
+          (e) => e.id == todoTasks[index!].id,
+        );
+        if (newIndex != -1) {
+          allDataList[newIndex] = todoTasks[index!];
+          log(" mmmmmmmmmmmmm :${allDataList.toString()}");
+        } else {
+          log("⚠️ Task not found in saved data.");
+        }
+        // allDataList[newIndex] = tasks[index!];
+
+        // final valueEncode = jsonEncode(allDataList);
+        final valueEncode = jsonEncode(
+          allDataList.map((e) => e.toMap()).toList(),
+        );
+
+        await pref.setString("tasks", valueEncode);
+        log("✅ Tasks saved successfully.");
+      }
     } catch (e) {
       log("❌ Error saving tasks: $e");
     }
@@ -74,7 +98,7 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
                 ? Center(
                   child: CircularProgressIndicator(color: Color(0xffFFFCFC)),
                 )
-                : tasks.isEmpty
+                : todoTasks.isEmpty
                 ? Center(
                   child: Text(
                     "No Task Found",
@@ -82,12 +106,12 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
                   ),
                 )
                 : TasksListWidget(
-                  tasks: tasks,
+                  tasks: todoTasks,
                   onTap: (bool? value, int? index) async {
                     setState(() {
-                      tasks[index!].isDone = value ?? false;
+                      todoTasks[index!].isDone = value ?? false;
                     });
-                    await _saveTasksToPrefs();
+                    await _saveTasksToPrefs(index);
                     _loadTask();
                   },
                 ),
