@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
           ),
           iconTheme: IconThemeData(color: Color(0xFFFFFCFC)),
         ),
-
         switchTheme: SwitchThemeData(
           trackColor: WidgetStateProperty.resolveWith<Color>((states) {
             if (states.contains(WidgetState.selected)) {

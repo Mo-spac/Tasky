@@ -19,6 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   String? username;
   List<TaskModel> tasks = [];
   bool isLoading = false;
+  int totalTask = 0;
+  int totalDoneTask = 0;
+  double percent = 0;
+
   @override
   void initState() {
     super.initState();
@@ -57,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         // task = taskAfterDecode;
         tasks = taskAfterDecode.map((e) => TaskModel.fromJson(e)).toList();
+        _caculatePercentProgress();
       });
       // log("task : ${task[0]["taskName"]}");
       log("task : ${tasks[0].taskName}");
@@ -85,6 +90,12 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       log("❌ Error saving tasks: $e");
     }
+  }
+
+  _caculatePercentProgress() {
+    totalTask = tasks.length;
+    totalDoneTask = tasks.where((e) => e.isDone).length;
+    percent = totalTask == 0 ? 0 : totalDoneTask / totalTask;
   }
 
   @override
@@ -148,6 +159,55 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+            Card(
+              color: Color(0xff282828),
+              child: ListTile(
+                title: Text(
+                  "Achieved Tasks",
+                  style: TextStyle(
+                    color: Color(0xffFFFCFC),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                subtitle: Text(
+                  "$totalDoneTask Out of $totalTask Done",
+                  style: TextStyle(
+                    color: Color(0xffC6C6C6),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                trailing: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Transform.rotate(
+                      angle: -3.14 / 2,
+                      child: SizedBox(
+                        width: 48,
+                        height: 48,
+                        child: CircularProgressIndicator(
+                          value: percent,
+                          backgroundColor: Color(0xff6D6D6D),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Color(0xff15B86C),
+                          ),
+                          strokeWidth: 4,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "${(percent * 100).toInt()} %",
+                      style: TextStyle(
+                        color: Color(0xffFFFCFC),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 24.0, bottom: 16.0),
               child: Align(
@@ -185,6 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: (bool? value, int? index) async {
                           setState(() {
                             tasks[index!].isDone = value ?? false;
+                            _caculatePercentProgress();
                           });
                           await _saveTasksToPrefs();
                         },
