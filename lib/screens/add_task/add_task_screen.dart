@@ -124,7 +124,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         isHighPriority = value;
                       });
                     },
-                    activeTrackColor: Color(0xFF15B86C),
                   ),
                 ],
               ),

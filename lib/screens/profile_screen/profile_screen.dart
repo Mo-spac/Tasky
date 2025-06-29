@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +12,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   late final String username;
   bool isLoading = true;
+  bool isDark = true;
 
   @override
   void initState() {
@@ -129,7 +128,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   trailing: Icon(Icons.arrow_forward, color: Color(0xffC6C6C6)),
                 ),
                 ListTile(
-                  onTap: () {},
                   contentPadding: EdgeInsets.zero,
                   shape: Border.symmetric(
                     horizontal: BorderSide(
@@ -148,9 +146,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   trailing: Switch(
-                    value: true,
-                    onChanged: (bool value) {},
-                    activeTrackColor: Color(0xFF15B86C),
+                    value: isDark,
+                    onChanged: (bool value) {
+                      setState(() {
+                        isDark = value;
+                      });
+                    },
                   ),
                 ),
                 ListTile(
