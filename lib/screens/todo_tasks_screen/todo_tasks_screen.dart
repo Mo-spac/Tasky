@@ -89,33 +89,49 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("To Do Tasks")),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child:
-            isLoading
-                ? Center(
-                  child: CircularProgressIndicator(color: Color(0xffFFFCFC)),
-                )
-                : todoTasks.isEmpty
-                ? Center(
-                  child: Text(
-                    "No Task Found",
-                    style: TextStyle(color: Color(0xffFFFCFC), fontSize: 24),
-                  ),
-                )
-                : TasksListWidget(
-                  tasks: todoTasks,
-                  onTap: (bool? value, int? index) async {
-                    setState(() {
-                      todoTasks[index!].isDone = value ?? false;
-                    });
-                    await _saveTasksToPrefs(index);
-                    _loadTask();
-                  },
-                ),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Text(
+            "To Do Tasks",
+            style: TextStyle(color: Color(0xffFFFCFC), fontSize: 20),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child:
+                isLoading
+                    ? Center(
+                      child: CircularProgressIndicator(
+                        color: Color(0xffFFFCFC),
+                      ),
+                    )
+                    : todoTasks.isEmpty
+                    ? Center(
+                      child: Text(
+                        "No Task Found",
+                        style: TextStyle(
+                          color: Color(0xffFFFCFC),
+                          fontSize: 24,
+                        ),
+                      ),
+                    )
+                    : TasksListWidget(
+                      tasks: todoTasks,
+                      onTap: (bool? value, int? index) async {
+                        setState(() {
+                          todoTasks[index!].isDone = value ?? false;
+                        });
+                        await _saveTasksToPrefs(index);
+                        _loadTask();
+                      },
+                    ),
+          ),
+        ),
+      ],
     );
   }
 }
