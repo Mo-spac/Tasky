@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/images/home.svg",
+              "assets/icons/home.svg",
               colorFilter: ColorFilter.mode(
                 _currentIndex == 0 ? Color(0xff15B86C) : Color(0xffC6C6C6),
                 BlendMode.srcIn,
@@ -52,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/images/todo.svg",
+              "assets/icons/todo.svg",
               colorFilter: ColorFilter.mode(
                 _currentIndex == 1 ? Color(0xff15B86C) : Color(0xffC6C6C6),
                 BlendMode.srcIn,
@@ -62,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/images/completed.svg",
+              "assets/icons/completed.svg",
               colorFilter: ColorFilter.mode(
                 _currentIndex == 2 ? Color(0xff15B86C) : Color(0xffC6C6C6),
                 BlendMode.srcIn,
@@ -72,7 +72,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/images/profile.svg",
+              "assets/icons/profile.svg",
               colorFilter: ColorFilter.mode(
                 _currentIndex == 3 ? Color(0xff15B86C) : Color(0xffC6C6C6),
                 BlendMode.srcIn,
@@ -82,7 +82,12 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: SafeArea(child: screens[_currentIndex]),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: screens[_currentIndex],
+        ),
+      ),
     );
   }
 }

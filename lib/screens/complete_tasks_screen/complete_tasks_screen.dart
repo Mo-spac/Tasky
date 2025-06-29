@@ -93,43 +93,35 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(18.0),
+          padding: const EdgeInsets.symmetric(vertical: 18.0),
           child: Text(
             "Completed Tasks",
             style: TextStyle(color: Color(0xffFFFCFC), fontSize: 20),
           ),
         ),
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child:
-                isLoading
-                    ? Center(
-                      child: CircularProgressIndicator(
-                        color: Color(0xffFFFCFC),
-                      ),
-                    )
-                    : CompleteTasks.isEmpty
-                    ? Center(
-                      child: Text(
-                        "No Task Found",
-                        style: TextStyle(
-                          color: Color(0xffFFFCFC),
-                          fontSize: 24,
-                        ),
-                      ),
-                    )
-                    : TasksListWidget(
-                      tasks: CompleteTasks,
-                      onTap: (bool? value, int? index) async {
-                        setState(() {
-                          CompleteTasks[index!].isDone = value ?? false;
-                        });
-                        await _saveTasksToPrefs(index);
-                        _loadTask();
-                      },
+          child:
+              isLoading
+                  ? Center(
+                    child: CircularProgressIndicator(color: Color(0xffFFFCFC)),
+                  )
+                  : CompleteTasks.isEmpty
+                  ? Center(
+                    child: Text(
+                      "No Task Found",
+                      style: TextStyle(color: Color(0xffFFFCFC), fontSize: 24),
                     ),
-          ),
+                  )
+                  : TasksListWidget(
+                    tasks: CompleteTasks,
+                    onTap: (bool? value, int? index) async {
+                      setState(() {
+                        CompleteTasks[index!].isDone = value ?? false;
+                      });
+                      await _saveTasksToPrefs(index);
+                      _loadTask();
+                    },
+                  ),
         ),
       ],
     );
