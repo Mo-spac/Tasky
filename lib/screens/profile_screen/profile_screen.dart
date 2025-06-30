@@ -21,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _loadUsername() async {
-    isLoading = true;
+    // isLoading = true;
     final pref = await SharedPreferences.getInstance();
     setState(() {
       username = pref.getString("username") ?? "";
@@ -79,15 +79,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                   SizedBox(height: 8),
-                  if (username != null)
-                    Text(
-                      username,
-                      style: TextStyle(
-                        color: Color(0xffFFFCFC),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                      ),
+                  // if (username != null)
+                  Text(
+                    username,
+                    style: TextStyle(
+                      color: Color(0xffFFFCFC),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
                     ),
+                  ),
                   Text(
                     "One task at a time. One step closer.",
                     style: TextStyle(
@@ -112,7 +112,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                // Divider(thickness: 1, color: Color(0xffFFFCFC)),
                 ListTile(
                   onTap: () {},
                   contentPadding: EdgeInsets.zero,

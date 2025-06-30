@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/models/task_model.dart';
-import 'package:tasky/widgets/tasks_list_widget.dart';
+import 'package:tasky/screens/widgets/tasks_list_widget.dart';
 
 class TodoTasksScreen extends StatefulWidget {
   const TodoTasksScreen({super.key});

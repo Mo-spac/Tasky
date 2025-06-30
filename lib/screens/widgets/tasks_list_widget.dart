@@ -16,6 +16,7 @@ class TasksListWidget extends StatelessWidget {
           (BuildContext context, int index) => Card(
             color: Color(0xff282828),
             child: ListTile(
+              contentPadding: EdgeInsets.zero,
               leading: Checkbox(
                 value: tasks[index].isDone,
                 onChanged: (value) {
