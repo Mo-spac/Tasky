@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/add_task/add_task_screen.dart';
@@ -114,6 +115,98 @@ class _HomeScreenState extends State<HomeScreen> {
               percent: percent,
             ),
             SizedBox(height: 8),
+            Container(
+              padding: EdgeInsets.only(top: 16),
+
+              decoration: BoxDecoration(
+                color: Color(0xff282828),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "High Priority Tasks",
+                            style: TextStyle(
+                              color: Color(0xff15B86C),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        ...tasks.reversed
+                            .where((task) => task.isHighPriority)
+                            .take(4)
+                            .map(
+                              (element) => Row(
+                                children: [
+                                  Checkbox(
+                                    value: element.isDone,
+                                    onChanged: (value) async {
+                                      setState(() {
+                                        element.isDone = value ?? false;
+                                        _caculatePercentProgress();
+                                      });
+                                      await _saveTasksToPrefs();
+                                    },
+                                    activeColor: Color(0xFF15B86C),
+                                    checkColor: Color(0xffFFFCFC),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      element.taskName,
+                                      style: TextStyle(
+                                        color:
+                                            element.isDone
+                                                ? Color(0xffA0A0A0)
+                                                : Color(0xffFFFCFC),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        decoration:
+                                            element.isDone
+                                                ? TextDecoration.lineThrough
+                                                : TextDecoration.none,
+                                        decorationColor: Color(0xffC6C6C6),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      width: 48,
+                      height: 56,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Color(0xff282828),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Color(0xff6E6E6E)),
+                      ),
+                      child: SvgPicture.asset(
+                        "assets/icons/arrow-up-right.svg",
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 24.0, bottom: 16.0),
               child: Align(
