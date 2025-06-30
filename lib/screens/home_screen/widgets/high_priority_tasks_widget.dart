@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tasky/models/task_model.dart';
+import 'package:tasky/screens/high_priority_screen/high_priority_screen.dart';
 
-class HighPriorityTasks extends StatelessWidget {
-  const HighPriorityTasks({
+class HighPriorityTasksWidget extends StatelessWidget {
+  const HighPriorityTasksWidget({
     super.key,
     required this.tasks,
     required this.onToggle,
+    required this.refresh,
   });
 
   final List<TaskModel> tasks;
   final Function(TaskModel, bool?) onToggle;
+  final Function refresh;
 
   @override
   Widget build(BuildContext context) {
@@ -82,18 +85,30 @@ class HighPriorityTasks extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              width: 48,
-              height: 56,
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xff282828),
-                shape: BoxShape.circle,
-                border: Border.all(color: Color(0xff6E6E6E)),
+          GestureDetector(
+            onTap: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => HighPriorityScreen(),
+                ),
+              );
+
+              refresh();
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                width: 48,
+                height: 56,
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Color(0xff282828),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Color(0xff6E6E6E)),
+                ),
+                child: SvgPicture.asset("assets/icons/arrow-up-right.svg"),
               ),
-              child: SvgPicture.asset("assets/icons/arrow-up-right.svg"),
             ),
           ),
         ],

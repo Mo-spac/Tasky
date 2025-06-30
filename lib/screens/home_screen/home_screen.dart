@@ -7,7 +7,7 @@ import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/add_task/add_task_screen.dart';
 import 'package:tasky/screens/home_screen/widgets/acheived_tasks.dart';
 import 'package:tasky/screens/home_screen/widgets/greeting.dart';
-import 'package:tasky/screens/home_screen/widgets/high_priority_tasks.dart';
+import 'package:tasky/screens/home_screen/widgets/high_priority_tasks_widget.dart';
 import 'package:tasky/screens/widgets/tasks_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -136,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
               percent: percent,
             ),
             SizedBox(height: 8),
-            HighPriorityTasks(
+            HighPriorityTasksWidget(
               tasks: tasks,
               onToggle: (TaskModel task, bool? value) async {
                 setState(() {
@@ -144,6 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   _caculatePercentProgress();
                 });
                 await _saveTasksToPrefs();
+              },
+              refresh: () {
+                _loadTask();
               },
             ),
 

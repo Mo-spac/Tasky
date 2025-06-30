@@ -6,15 +6,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/widgets/tasks_list_widget.dart';
 
-class CompleteTasksScreen extends StatefulWidget {
-  const CompleteTasksScreen({super.key});
+class HighPriorityScreen extends StatefulWidget {
+  const HighPriorityScreen({super.key});
 
   @override
-  State<CompleteTasksScreen> createState() => _CompleteTasksScreenState();
+  State<HighPriorityScreen> createState() => _HighPriorityScreenState();
 }
 
-class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
-  List<TaskModel> completeTasks = [];
+class _HighPriorityScreenState extends State<HighPriorityScreen> {
+  List<TaskModel> highPriorityTasks = [];
   bool isLoading = false;
 
   @override
@@ -35,17 +35,17 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
 
       setState(() {
         // task = taskAfterDecode;
-        completeTasks =
+        highPriorityTasks =
             taskAfterDecode
                 .map((element) => TaskModel.fromJson(element))
-                .where((element) => element.isDone)
+                .where((element) => element.isHighPriority)
                 .toList();
-        // Short for this code
+        highPriorityTasks = highPriorityTasks.reversed.toList();
+        // Short for this code:
         // tasks = taskAfterDecode.map((e) => TaskModel.fromJson(e)).toList();
         // tasks = tasks.where((element) => element.isDone == false).toList();
       });
     }
-
     setState(() {
       isLoading = false;
     });
@@ -64,10 +64,10 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
                 .map((e) => TaskModel.fromJson(e))
                 .toList();
         final int newIndex = allDataList.indexWhere(
-          (e) => e.id == completeTasks[index!].id,
+          (e) => e.id == highPriorityTasks[index!].id,
         );
         if (newIndex != -1) {
-          allDataList[newIndex] = completeTasks[index!];
+          allDataList[newIndex] = highPriorityTasks[index!];
           log(" mmmmmmmmmmmmm :${allDataList.toString()}");
         } else {
           log("⚠️ Task not found in saved data.");
@@ -89,41 +89,35 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 18.0),
-          child: Text(
-            "Completed Tasks",
-            style: TextStyle(color: Color(0xffFFFCFC), fontSize: 20),
-          ),
-        ),
-        Expanded(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text("High Priorty Tasks")),
+        body: Padding(
+          padding: EdgeInsets.all(16),
           child:
               isLoading
                   ? Center(
                     child: CircularProgressIndicator(color: Color(0xffFFFCFC)),
                   )
-                  : completeTasks.isEmpty
+                  : highPriorityTasks.isEmpty
                   ? Center(
                     child: Text(
-                      "No Task Found",
+                      "No High Priority Tasks",
                       style: TextStyle(color: Color(0xffFFFCFC), fontSize: 24),
                     ),
                   )
                   : TasksListWidget(
-                    tasks: completeTasks,
+                    tasks: highPriorityTasks,
                     onTap: (bool? value, int? index) async {
                       setState(() {
-                        completeTasks[index!].isDone = value ?? false;
+                        highPriorityTasks[index!].isDone = value ?? false;
                       });
                       await _saveTasksToPrefs(index);
                       _loadTask();
                     },
                   ),
         ),
-      ],
+      ),
     );
   }
 }
