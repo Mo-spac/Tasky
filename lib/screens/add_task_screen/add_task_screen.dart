@@ -134,8 +134,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF15B86C),
-                  foregroundColor: Color(0xFFFFFCFC),
                   fixedSize: Size(MediaQuery.of(context).size.width, 40),
                 ),
                 icon: Icon(Icons.add),

@@ -63,6 +63,14 @@ class MyApp extends StatelessWidget {
             return 2;
           }),
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(Color(0xFF15B86C)),
+            foregroundColor: WidgetStateProperty.all(Color(0xFFFFFCFC)),
+            // minimumSize: WidgetStateProperty.all(Size.fromHeight(40)),
+            // ,
+          ),
+        ),
       ),
 
       home: username == null ? WelcomeScreen() : MainScreen(),
