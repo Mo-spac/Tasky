@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/core/wedgits/custom_text_form_field.dart';
 import 'package:tasky/screens/home_screen/home_screen.dart';
 import 'package:tasky/screens/main_screen/main_screen.dart';
 
@@ -18,20 +19,11 @@ class StartSection extends StatelessWidget {
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Full Name",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFFFFFCFC),
-                ),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: TextFormField(
+              child: CustomTextFormField(
+                title: "Full Name",
+                controller: controller,
                 validator: (value) {
                   // if (value == null || value.trim().isEmpty) {
                   //   return "Please, Enter your full name";
@@ -41,20 +33,7 @@ class StartSection extends StatelessWidget {
                   }
                   return null;
                 },
-                controller: controller,
-                // onChanged: (value) {},
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  hintText: "e.g. Sarah Khalid",
-                  filled: true,
-                  fillColor: Color(0xff282828),
-                  hintStyle: TextStyle(color: Color(0xff6D6D6D)),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                cursorColor: Colors.white,
+                hintText: "e.g. Sarah Khalid",
               ),
             ),
             SizedBox(height: 16),

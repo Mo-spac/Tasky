@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/models/task_model.dart';
-import 'package:tasky/screens/add_task/add_task_screen.dart';
+import 'package:tasky/screens/add_task_screen/add_task_screen.dart';
 import 'package:tasky/screens/home_screen/widgets/acheived_tasks.dart';
 import 'package:tasky/screens/home_screen/widgets/greeting.dart';
 import 'package:tasky/screens/home_screen/widgets/high_priority_tasks_widget.dart';

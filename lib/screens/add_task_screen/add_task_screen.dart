@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/core/wedgits/custom_text_form_field.dart';
 import 'package:tasky/models/task_model.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -32,18 +33,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         child: Form(
           key: _key,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Task Name",
-                style: TextStyle(
-                  color: Color(0xFFFFFCFC),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 8),
-              TextFormField(
+              CustomTextFormField(
+                title: "Task Name",
                 controller: taskNameController,
                 validator: (String? value) {
                   if (value?.trim().isEmpty ?? false) {
@@ -51,60 +44,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   }
                   return null;
                 },
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  hintText: "Finish UI design for login screen",
-                  filled: true,
-                  fillColor: Color(0xff282828),
-                  hintStyle: TextStyle(
-                    color: Color(0xff6D6D6D),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                cursorColor: Colors.white,
+                hintText: "Finish UI design for login screen",
               ),
               SizedBox(height: 20),
-              Text(
-                "Task Description",
-                style: TextStyle(
-                  color: Color(0xFFFFFCFC),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
               SizedBox(height: 8),
-              TextFormField(
+              CustomTextFormField(
+                title: "Task Description",
                 controller: taskDescriptionController,
-                // validator: (String? value) {
-                //   if (value?.trim().isEmpty ?? false) {
-                //     return "Please, Enter your Task's description";
-                //   }
-                //   return null;
-                // },
-                style: TextStyle(color: Colors.white),
+                hintText:
+                    "Finish onboarding UI and hand off to devs by Thursday.",
                 maxLines: 5,
-                decoration: InputDecoration(
-                  hintText:
-                      "Finish onboarding UI and hand off to devs by Thursday.",
-                  filled: true,
-                  fillColor: Color(0xff282828),
-                  hintStyle: TextStyle(
-                    color: Color(0xff6D6D6D),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                cursorColor: Colors.white,
               ),
+
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
