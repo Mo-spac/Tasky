@@ -8,6 +8,7 @@ import 'package:tasky/screens/add_task/add_task_screen.dart';
 import 'package:tasky/screens/home_screen/widgets/acheived_tasks.dart';
 import 'package:tasky/screens/home_screen/widgets/greeting.dart';
 import 'package:tasky/screens/home_screen/widgets/high_priority_tasks_widget.dart';
+import 'package:tasky/screens/widgets/sliver_tasks_list_widget.dart';
 import 'package:tasky/screens/widgets/tasks_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -124,127 +125,80 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Column(
-          children: [
-            Greeting(username: username ?? ""),
-            SizedBox(height: 16),
-            AcheivedTasks(
-              totalTask: totalTask,
-              totalDoneTask: totalDoneTask,
-              percent: percent,
-            ),
-            SizedBox(height: 8),
-            HighPriorityTasksWidget(
-              tasks: tasks,
-              onToggle: (TaskModel task, bool? value) async {
-                setState(() {
-                  task.isDone = value ?? false;
-                  _caculatePercentProgress();
-                });
-                await _saveTasksToPrefs();
-              },
-              refresh: () {
-                _loadTask();
-              },
-            ),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Greeting(username: username ?? ""),
+                SizedBox(height: 16),
+                AcheivedTasks(
+                  totalTask: totalTask,
+                  totalDoneTask: totalDoneTask,
+                  percent: percent,
+                ),
+                SizedBox(height: 8),
+                HighPriorityTasksWidget(
+                  tasks: tasks,
+                  onToggle: (TaskModel task, bool? value) async {
+                    setState(() {
+                      task.isDone = value ?? false;
+                      _caculatePercentProgress();
+                    });
+                    await _saveTasksToPrefs();
+                  },
+                  refresh: () {
+                    _loadTask();
+                  },
+                ),
 
-            Padding(
-              padding: const EdgeInsets.only(top: 24.0, bottom: 16.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "My Tasks",
-                  style: TextStyle(
-                    color: Color(0xffFFFCFC),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
+                Padding(
+                  padding: const EdgeInsets.only(top: 24.0, bottom: 16.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "My Tasks",
+                      style: TextStyle(
+                        color: Color(0xffFFFCFC),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ),
                 ),
+              ],
+            ),
+          ),
+          isLoading
+              ? SliverToBoxAdapter(
+                child: Center(
+                  child: CircularProgressIndicator(color: Color(0xffFFFCFC)),
+                ),
+              )
+              : tasks.isEmpty
+              ? SliverToBoxAdapter(
+                child: Center(
+                  child: Text(
+                    "No Tasks",
+                    style: TextStyle(
+                      color: Color(0xffFFFCFC),
+                      fontSize: 24,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              )
+              : SliverTasksListWidget(
+                tasks: tasks,
+                onTap: (bool? value, int? index) async {
+                  setState(() {
+                    tasks[index!].isDone = value ?? false;
+                    _caculatePercentProgress();
+                  });
+                  await _saveTasksToPrefs();
+                },
               ),
-            ),
-            Expanded(
-              child:
-                  isLoading
-                      ? Center(
-                        child: CircularProgressIndicator(
-                          color: Color(0xffFFFCFC),
-                        ),
-                      )
-                      : tasks.isEmpty
-                      ? Center(
-                        child: Text(
-                          "No Tasks",
-                          style: TextStyle(
-                            color: Color(0xffFFFCFC),
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      )
-                      : TasksListWidget(
-                        tasks: tasks,
-                        onTap: (bool? value, int? index) async {
-                          setState(() {
-                            tasks[index!].isDone = value ?? false;
-                            _caculatePercentProgress();
-                          });
-                          await _saveTasksToPrefs();
-                        },
-                        // When I use Function for both:
-                        // (bool? value, int? index) async {
-                        //     if (index != null) {
-                        //       _updateTaskStatus(tasks[index], value);
-                        //     }
-                        //   },
-                      ),
-            ),
-
-            // if (tasks.isNotEmpty)
-            //   Column(
-            //     children: [
-            //       Text(
-            //         tasks[0].taskName,
-            //         style: TextStyle(color: Colors.red),
-            //       ),
-            //       Text(
-            //         tasks[0].taskDescription,
-            //         style: TextStyle(color: Colors.red),
-            //       ),
-            //       Text(
-            //         "${tasks[0].isHighPriority}",
-            //         style: TextStyle(color: Colors.red),
-            //       ),
-            //     ],
-            //   ),
-
-            //   Spacer(),
-            //   Align(
-            //     alignment: Alignment.bottomRight,
-            //     child: ElevatedButton.icon(
-            //       onPressed: () {
-            //         Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //             builder: (BuildContext context) => AddTask(),
-            //           ),
-            //         );
-            //       },
-            //       style: ElevatedButton.styleFrom(
-            //         backgroundColor: Color(0xFF15B86C),
-            //         foregroundColor: Color(0xFFFFFCFC),
-            //         fixedSize: Size(167, 40),
-            //       ),
-            //       icon: Icon(Icons.add),
-            //       label: Text(
-            //         "Add New Task",
-            //         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            //       ),
-            //     ),
-            //   ),
-          ],
-        ),
+        ],
       ),
 
       floatingActionButton: SizedBox(

@@ -21,7 +21,6 @@ class HighPriorityTasksWidget extends StatelessWidget {
         tasks.reversed.where((task) => task.isHighPriority).take(4).toList();
     return Container(
       padding: EdgeInsets.only(top: 16),
-
       decoration: BoxDecoration(
         color: Color(0xff282828),
         borderRadius: BorderRadius.circular(20),
