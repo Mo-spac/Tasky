@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/screens/user_details_screen/user_details_screen.dart';
+import 'package:tasky/screens/welcome_screen/welcome_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -169,7 +170,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () async {
+                    final pref = await SharedPreferences.getInstance();
+                    pref.remove("username");
+                    pref.remove("motivationQuote");
+                    pref.remove("tasks");
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => WelcomeScreen(),
+                      ),
+                      (Route<dynamic> route) => false,
+                    );
+                  },
                   contentPadding: EdgeInsets.zero,
                   leading: SvgPicture.asset("assets/icons/log_out.svg"),
                   title: Text(
