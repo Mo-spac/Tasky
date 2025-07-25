@@ -52,6 +52,12 @@ class StartSection extends StatelessWidget {
                   // controller.clear();
                 } else {
                   //  snackBar TO DO
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Please, Enter your full name"),
+                      elevation: 10,
+                    ),
+                  );
                 }
               },
               style: ElevatedButton.styleFrom(
