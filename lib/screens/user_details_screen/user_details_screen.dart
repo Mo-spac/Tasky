@@ -18,18 +18,12 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   String? username;
   String? motivationQuote;
 
-  void _loadUsername() async {
+  void _loadUserInfo() async {
     final pref = await SharedPreferences.getInstance();
     setState(() {
       username = pref.getString("username");
-      // userNameController.text = username ?? "";
-    });
-  }
-
-  void _loadMotivationQuote() async {
-    final pref = await SharedPreferences.getInstance();
-    setState(() {
       motivationQuote = pref.getString("motivationQuote");
+      // userNameController.text = username ?? "";
       // motivationController.text = motivationQuote ?? "";
     });
   }
@@ -37,8 +31,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _loadUsername();
-    _loadMotivationQuote();
+    _loadUserInfo();
   }
 
   @override

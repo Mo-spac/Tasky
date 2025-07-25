@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasky/core/wedgits/custom_text_form_field.dart';
-import 'package:tasky/screens/home_screen/home_screen.dart';
 import 'package:tasky/screens/main_screen/main_screen.dart';
 
 class StartSection extends StatelessWidget {

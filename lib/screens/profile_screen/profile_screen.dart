@@ -19,23 +19,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _loadUsername();
-    _loadMotivationQuote();
+    _loadUserInfo();
   }
 
-  void _loadUsername() async {
+  void _loadUserInfo() async {
     // isLoading = true;
     final pref = await SharedPreferences.getInstance();
     setState(() {
       username = pref.getString("username") ?? "";
-      isLoading = false;
-    });
-  }
-
-  void _loadMotivationQuote() async {
-    // isLoading = true;
-    final pref = await SharedPreferences.getInstance();
-    setState(() {
       motivationQuote =
           pref.getString("motivationQuote") ??
           "One task at a time. One step closer.";
@@ -135,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     );
                     if (result != null && result == true) {
-                      _loadUsername();
+                      _loadUserInfo();
                     }
                   },
                   contentPadding: EdgeInsets.zero,
