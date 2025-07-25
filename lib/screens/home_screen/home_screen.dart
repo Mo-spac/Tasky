@@ -2,14 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/core/services/preference_manager.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/add_task_screen/add_task_screen.dart';
 import 'package:tasky/screens/home_screen/widgets/acheived_tasks.dart';
 import 'package:tasky/screens/home_screen/widgets/greeting.dart';
 import 'package:tasky/screens/home_screen/widgets/high_priority_tasks_widget.dart';
 import 'package:tasky/screens/widgets/sliver_tasks_list_widget.dart';
-import 'package:tasky/screens/widgets/tasks_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -38,8 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       isLoading = true;
     });
     // await Future.delayed(Duration(seconds: 3));
-    final pref = await SharedPreferences.getInstance();
-    final finalTask = pref.getString("tasks");
+    final finalTask = PreferenceManager().getString("tasks");
 
     log("finalTask: $finalTask".toString());
     if (finalTask != null) {
@@ -76,19 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _loadUsername() async {
-    final pref = await SharedPreferences.getInstance();
     setState(() {
-      username = pref.getString("username");
+      username = PreferenceManager().getString("username");
     });
     print("Usernameee = $username");
   }
 
   Future<void> _saveTasksToPrefs() async {
     try {
-      final pref = await SharedPreferences.getInstance();
       final updatedTasks = tasks.map((e) => e.toMap()).toList();
       final valueEncode = jsonEncode(updatedTasks);
-      await pref.setString("tasks", valueEncode);
+      await PreferenceManager().setString("tasks", valueEncode);
       log("✅ Tasks saved successfully.");
     } catch (e) {
       log("❌ Error saving tasks: $e");

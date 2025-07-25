@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/core/services/preference_manager.dart';
 import 'package:tasky/core/wedgits/custom_text_form_field.dart';
 import 'package:tasky/screens/main_screen/main_screen.dart';
 
@@ -40,8 +40,10 @@ class StartSection extends StatelessWidget {
               onPressed: () async {
                 // print(controller.value.text);
                 if (_key.currentState?.validate() ?? false) {
-                  final pref = await SharedPreferences.getInstance();
-                  await pref.setString("username", controller.value.text);
+                  await PreferenceManager().setString(
+                    "username",
+                    controller.value.text,
+                  );
                   // String? username = pref.getString("username");
                   Navigator.pushReplacement(
                     context,

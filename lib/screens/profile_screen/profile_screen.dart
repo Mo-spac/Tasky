@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/core/services/preference_manager.dart';
 import 'package:tasky/screens/user_details_screen/user_details_screen.dart';
 import 'package:tasky/screens/welcome_screen/welcome_screen.dart';
 
@@ -25,11 +25,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _loadUserInfo() async {
     // isLoading = true;
-    final pref = await SharedPreferences.getInstance();
     setState(() {
-      username = pref.getString("username") ?? "";
+      username = PreferenceManager().getString("username") ?? "";
       motivationQuote =
-          pref.getString("motivationQuote") ??
+          PreferenceManager().getString("motivationQuote") ??
           "One task at a time. One step closer.";
       isLoading = false;
     });
@@ -120,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 ListTile(
                   onTap: () async {
-                    final result = await Navigator.push(
+                    final result = await Navigator.push<bool>(
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) => UserDetailsScreen(),
@@ -171,10 +170,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 ListTile(
                   onTap: () async {
-                    final pref = await SharedPreferences.getInstance();
-                    pref.remove("username");
-                    pref.remove("motivationQuote");
-                    pref.remove("tasks");
+                    PreferenceManager().remove("username");
+                    PreferenceManager().remove("motivationQuote");
+                    PreferenceManager().remove("tasks");
 
                     Navigator.pushAndRemoveUntil(
                       context,

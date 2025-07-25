@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/core/services/preference_manager.dart';
 import 'package:tasky/core/wedgits/custom_text_form_field.dart';
 
 class UserDetailsScreen extends StatefulWidget {
@@ -19,10 +19,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   String? motivationQuote;
 
   void _loadUserInfo() async {
-    final pref = await SharedPreferences.getInstance();
     setState(() {
-      username = pref.getString("username");
-      motivationQuote = pref.getString("motivationQuote");
+      username = PreferenceManager().getString("username");
+      motivationQuote = PreferenceManager().getString("motivationQuote");
       // userNameController.text = username ?? "";
       // motivationController.text = motivationQuote ?? "";
     });
@@ -71,14 +70,13 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             ElevatedButton(
               onPressed: () async {
                 if (_key.currentState!.validate()) {
-                  final pref = await SharedPreferences.getInstance();
-                  await pref.setString(
+                  await PreferenceManager().setString(
                     "username",
                     userNameController.value.text,
                   );
 
                   // save new key -> motivation_quote -- > string
-                  await pref.setString(
+                  await PreferenceManager().setString(
                     "motivationQuote",
                     motivationController.value.text,
                   );

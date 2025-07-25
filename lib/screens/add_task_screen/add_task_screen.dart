@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/core/services/preference_manager.dart';
 import 'package:tasky/core/wedgits/custom_text_form_field.dart';
 import 'package:tasky/models/task_model.dart';
 
@@ -82,8 +82,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ElevatedButton.icon(
                 onPressed: () async {
                   if (_key.currentState?.validate() ?? false) {
-                    final pref = await SharedPreferences.getInstance();
-                    final taskJson = pref.getString("tasks");
+                    final taskJson = PreferenceManager().getString("tasks");
                     log(taskJson.toString());
 
                     List<dynamic> listTasks = [];
@@ -105,7 +104,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     log("List Tasks after added : $listTasks");
 
                     final tasksEncode = jsonEncode(listTasks);
-                    await pref.setString("tasks", tasksEncode);
+                    await PreferenceManager().setString("tasks", tasksEncode);
 
                     // Map<String, dynamic> task = {
                     //   "taskName": taskNameController.text,

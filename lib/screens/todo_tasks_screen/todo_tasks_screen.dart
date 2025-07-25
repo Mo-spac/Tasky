@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasky/core/services/preference_manager.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/widgets/tasks_list_widget.dart';
 
@@ -27,8 +27,7 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
     setState(() {
       isLoading = true;
     });
-    final pref = await SharedPreferences.getInstance();
-    final finalTask = pref.getString("tasks");
+    final finalTask = PreferenceManager().getString("tasks");
 
     if (finalTask != null) {
       final taskAfterDecode = jsonDecode(finalTask) as List<dynamic>;
@@ -54,9 +53,8 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
   Future<void> _saveTasksToPrefs(int? index) async {
     try {
       //  if (index == null) return;
-      final pref = await SharedPreferences.getInstance();
       // final updatedTasks = tasks.map((e) => e.toMap()).toList();
-      final allData = pref.getString("tasks");
+      final allData = PreferenceManager().getString("tasks");
 
       if (allData != null) {
         List<TaskModel> allDataList =
@@ -79,7 +77,7 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
           allDataList.map((e) => e.toMap()).toList(),
         );
 
-        await pref.setString("tasks", valueEncode);
+        await PreferenceManager().setString("tasks", valueEncode);
         log("✅ Tasks saved successfully.");
       }
     } catch (e) {
