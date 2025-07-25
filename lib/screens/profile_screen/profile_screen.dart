@@ -11,7 +11,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  late final String username;
+  String? username;
+  String? motivationQuote;
   bool isLoading = true;
   bool isDark = true;
 
@@ -19,6 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _loadUsername();
+    _loadMotivationQuote();
   }
 
   void _loadUsername() async {
@@ -26,8 +28,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final pref = await SharedPreferences.getInstance();
     setState(() {
       username = pref.getString("username") ?? "";
+      isLoading = false;
     });
-    isLoading = false;
+  }
+
+  void _loadMotivationQuote() async {
+    // isLoading = true;
+    final pref = await SharedPreferences.getInstance();
+    setState(() {
+      motivationQuote =
+          pref.getString("motivationQuote") ??
+          "One task at a time. One step closer.";
+      isLoading = false;
+    });
   }
 
   @override
@@ -82,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(height: 8),
                   // if (username != null)
                   Text(
-                    username,
+                    username ?? "",
                     style: TextStyle(
                       color: Color(0xffFFFCFC),
                       fontSize: 20,
@@ -90,7 +103,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   Text(
-                    "One task at a time. One step closer.",
+                    motivationQuote ?? "One task at a time. One step closer.",
                     style: TextStyle(
                       color: Color(0xffC6C6C6),
                       fontSize: 14,
@@ -114,13 +127,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 ListTile(
-                  onTap: () {
-                    Navigator.push(
+                  onTap: () async {
+                    final result = await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) => UserDetailsScreen(),
                       ),
                     );
+                    if (result != null && result == true) {
+                      _loadUsername();
+                    }
                   },
                   contentPadding: EdgeInsets.zero,
                   leading: SvgPicture.asset("assets/icons/user.svg"),
