@@ -11,14 +11,7 @@ class AppbarSection extends StatelessWidget {
       children: [
         SvgPicture.asset("assets/images/logo.svg", height: 42, width: 42),
         SizedBox(width: 16),
-        Text(
-          "Tasky",
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.w400,
-            color: Color(0xffFFFFFF),
-          ),
-        ),
+        Text("Tasky", style: Theme.of(context).textTheme.displayMedium),
       ],
     );
   }

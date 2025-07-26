@@ -15,11 +15,7 @@ class WelcomeSection extends StatelessWidget {
             children: [
               Text(
                 "Welcome To Tasky ",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFFFFFCFC),
-                ),
+                style: Theme.of(context).textTheme.displaySmall,
               ),
               SvgPicture.asset(
                 "assets/icons/waving-hand-medium-light-skin-tone.svg",
@@ -31,11 +27,9 @@ class WelcomeSection extends StatelessWidget {
           SizedBox(height: 8),
           Text(
             "Your productivity journey starts here.",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: Color(0xFFFFFCFC),
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.displaySmall!.copyWith(fontSize: 16),
           ),
           SizedBox(height: 24),
           SvgPicture.asset("assets/images/pana.svg", width: 215, height: 215),
