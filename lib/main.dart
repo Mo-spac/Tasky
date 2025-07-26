@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Tasky',
       theme: darkTheme,
 
-      home: username != null ? WelcomeScreen() : MainScreen(),
+      home: username == null ? WelcomeScreen() : MainScreen(),
     );
   }
 }

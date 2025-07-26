@@ -14,23 +14,15 @@ class AcheivedTasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color(0xff282828),
+      color: Theme.of(context).colorScheme.primaryContainer,
       child: ListTile(
         title: Text(
           "Achieved Tasks",
-          style: TextStyle(
-            color: Color(0xffFFFCFC),
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         subtitle: Text(
           "$totalDoneTask Out of $totalTask Done",
-          style: TextStyle(
-            color: Color(0xffC6C6C6),
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         trailing: Stack(
           alignment: Alignment.center,
@@ -50,8 +42,7 @@ class AcheivedTasks extends StatelessWidget {
             ),
             Text(
               "${(percent * 100).toInt()} %",
-              style: TextStyle(
-                color: Color(0xffFFFCFC),
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),

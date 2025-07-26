@@ -22,7 +22,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 16),
       decoration: BoxDecoration(
-        color: Color(0xff282828),
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(

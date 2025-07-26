@@ -20,19 +20,11 @@ class Greeting extends StatelessWidget {
           ),
           title: Text(
             "Good Evening , $username",
-            style: TextStyle(
-              color: Color(0xffFFFCFC),
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-            ),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           subtitle: Text(
             "One task at a time.One step closer.",
-            style: TextStyle(
-              color: Color(0xffC6C6C6),
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           trailing: SvgPicture.asset("assets/icons/Light.svg"),
         ),
@@ -41,22 +33,14 @@ class Greeting extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             "Yuhuu ,Your work Is ",
-            style: TextStyle(
-              color: Color(0xFFFFFCFC),
-              fontSize: 32,
-              fontWeight: FontWeight.w400,
-            ),
+            style: Theme.of(context).textTheme.displayLarge,
           ),
         ),
         Row(
           children: [
             Text(
               "almost done ! ",
-              style: TextStyle(
-                color: Color(0xFFFFFCFC),
-                fontSize: 32,
-                fontWeight: FontWeight.w400,
-              ),
+              style: Theme.of(context).textTheme.displayLarge,
             ),
             SvgPicture.asset(
               "assets/icons/waving-hand-medium-light-skin-tone.svg",

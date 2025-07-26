@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,
+  colorScheme: ColorScheme.dark(primaryContainer: Color(0xff282828)),
   scaffoldBackgroundColor: Color(0xFF181818),
   appBarTheme: AppBarTheme(
     backgroundColor: Color(0xFF181818),
@@ -59,6 +60,49 @@ ThemeData darkTheme = ThemeData(
       fontSize: 28,
       fontWeight: FontWeight.w400,
       color: Color(0xffFFFFFF),
+    ),
+
+    displayLarge: TextStyle(
+      color: Color(0xFFFFFCFC),
+      fontSize: 32,
+      fontWeight: FontWeight.w400,
+    ),
+
+    titleSmall: TextStyle(
+      color: Color(0xffC6C6C6),
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+    ),
+
+    titleMedium: TextStyle(
+      color: Color(0xffFFFCFC),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+
+    labelMedium: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: Colors.white,
+    ),
+  ),
+
+  inputDecorationTheme: InputDecorationTheme(
+    hintStyle: TextStyle(
+      color: Color(0xff6D6D6D),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+    filled: true,
+    fillColor: Color(0xff282828),
+
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide.none,
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide(color: Colors.red, width: 0.5),
     ),
   ),
 );
