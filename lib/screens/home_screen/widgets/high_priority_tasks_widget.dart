@@ -14,6 +14,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
 
   final List<TaskModel> tasks;
   final Function(TaskModel, bool?) onToggle;
+  // final Function(int?, bool?) onToggle;
   final Function refresh;
 
   @override
@@ -46,29 +47,64 @@ class HighPriorityTasksWidget extends StatelessWidget {
                   ),
                 ),
 
-                ...highPriorityTasks.map(
-                  (element) => Row(
-                    children: [
-                      CustomCheckBox(
-                        value: element.isDone,
-                        onChanged: (value) {
-                          onToggle(element, value);
-                        },
-                      ),
-
-                      Expanded(
-                        child: Text(
-                          element.taskName,
-                          style:
-                              element.isDone
-                                  ? Theme.of(context).textTheme.titleLarge
-                                  : Theme.of(context).textTheme.titleMedium,
-                          maxLines: 1,
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount:
+                      highPriorityTasks.length >= 4
+                          ? 4
+                          : highPriorityTasks.length,
+                  itemBuilder: (context, index) {
+                    final element = highPriorityTasks[index];
+                    return Row(
+                      children: [
+                        CustomCheckBox(
+                          value: element.isDone,
+                          onChanged: (value) {
+                            // final index = tasks.indexWhere((e) {
+                            //   return e.id == element.id;
+                            // });
+                            onToggle(element, value);
+                          },
                         ),
-                      ),
-                    ],
-                  ),
+                        Expanded(
+                          child: Text(
+                            element.taskName,
+                            style:
+                                element.isDone
+                                    ? Theme.of(context).textTheme.titleLarge
+                                    : Theme.of(context).textTheme.titleMedium,
+                            maxLines: 1,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
+
+                // ...highPriorityTasks.map(
+                //   (element) => Row(
+                //     children: [
+                //       CustomCheckBox(
+                //         value: element.isDone,
+                //         onChanged: (value) {
+                //           onToggle(element, value);
+                //         },
+                //       ),
+
+                //       Expanded(
+                //         child: Text(
+                //           element.taskName,
+                //           style:
+                //               element.isDone
+                //                   ? Theme.of(context).textTheme.titleLarge
+                //                   : Theme.of(context).textTheme.titleMedium,
+                //           maxLines: 1,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
