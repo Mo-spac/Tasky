@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tasky/core/wedgits/custom_check_box.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/high_priority_screen/high_priority_screen.dart';
 
@@ -44,37 +45,24 @@ class HighPriorityTasksWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 ...highPriorityTasks.map(
                   (element) => Row(
                     children: [
-                      Checkbox(
+                      CustomCheckBox(
                         value: element.isDone,
                         onChanged: (value) {
                           onToggle(element, value);
                         },
-                        activeColor: Color(0xFF15B86C),
-                        checkColor: Color(0xffFFFCFC),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
                       ),
+
                       Expanded(
                         child: Text(
                           element.taskName,
-                          style: TextStyle(
-                            color:
-                                element.isDone
-                                    ? Color(0xffA0A0A0)
-                                    : Color(0xffFFFCFC),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            decoration:
-                                element.isDone
-                                    ? TextDecoration.lineThrough
-                                    : TextDecoration.none,
-                            decorationColor: Color(0xffC6C6C6),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          style:
+                              element.isDone
+                                  ? Theme.of(context).textTheme.titleLarge
+                                  : Theme.of(context).textTheme.titleMedium,
                           maxLines: 1,
                         ),
                       ),
@@ -102,7 +90,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
                 height: 56,
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Color(0xff282828),
+                  color: Theme.of(context).colorScheme.primaryContainer,
                   shape: BoxShape.circle,
                   border: Border.all(color: Color(0xff6E6E6E)),
                 ),

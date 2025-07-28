@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/core/wedgits/custom_check_box.dart';
 import 'package:tasky/models/task_model.dart';
 
 class TasksListWidget extends StatelessWidget {
@@ -17,17 +18,13 @@ class TasksListWidget extends StatelessWidget {
             color: Color(0xff282828),
             child: ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: Checkbox(
+              leading: CustomCheckBox(
                 value: tasks[index].isDone,
                 onChanged: (value) {
                   onTap(value, index);
                 },
-                activeColor: Color(0xFF15B86C),
-                checkColor: Color(0xffFFFCFC),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
               ),
+
               title: Text(
                 tasks[index].taskName,
                 style: TextStyle(

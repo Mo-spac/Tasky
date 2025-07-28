@@ -80,6 +80,16 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.w400,
     ),
 
+    // for Done task
+    titleLarge: TextStyle(
+      color: Color(0xff6A6A6A),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.lineThrough,
+      decorationColor: Color(0xff49454F),
+      overflow: TextOverflow.ellipsis,
+    ),
+
     labelMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w400,
@@ -109,5 +119,10 @@ ThemeData lightTheme = ThemeData(
       borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide(color: Colors.red, width: 0.5),
     ),
+  ),
+
+  checkboxTheme: CheckboxThemeData(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+    side: BorderSide(color: Color(0xffD1DAD6), width: 2),
   ),
 );

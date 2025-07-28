@@ -80,6 +80,16 @@ ThemeData darkTheme = ThemeData(
       fontWeight: FontWeight.w400,
     ),
 
+    // for Done task
+    titleLarge: TextStyle(
+      color: Color(0xffA0A0A0),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.lineThrough,
+      decorationColor: Color(0xffA0A0A0),
+      overflow: TextOverflow.ellipsis,
+    ),
+
     labelMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w400,
@@ -104,5 +114,10 @@ ThemeData darkTheme = ThemeData(
       borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide(color: Colors.red, width: 0.5),
     ),
+  ),
+
+  checkboxTheme: CheckboxThemeData(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+    side: BorderSide(color: Color(0xff6E6E6E), width: 2),
   ),
 );
