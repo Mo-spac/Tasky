@@ -31,6 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       motivationQuote =
           PreferenceManager().getString("motivationQuote") ??
           "One task at a time. One step closer.";
+      isDark = PreferenceManager().getBool("theme") ?? true;
       isLoading = false;
     });
   }
@@ -162,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   trailing: Switch(
                     value: isDark,
-                    onChanged: (bool value) {
+                    onChanged: (bool value) async {
                       setState(() {
                         isDark = value;
                         if (!isDark) {
@@ -171,6 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           themeNotifire.value = ThemeMode.dark;
                         }
                       });
+                      await PreferenceManager().setBool("theme", value);
                     },
                   ),
                 ),
