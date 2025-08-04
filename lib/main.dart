@@ -5,9 +5,14 @@ import 'package:tasky/core/theme/light_theme.dart';
 import 'package:tasky/screens/main_screen/main_screen.dart';
 import 'package:tasky/screens/welcome_screen/welcome_screen.dart';
 
+// Value Notifire
+ValueNotifier<ThemeMode> themeNotifire = ValueNotifier(ThemeMode.light);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PreferenceManager().init();
+  // print(themeNotifire.value);
+  // themeNotifire.value = ThemeMode.light;
+  // print(themeNotifire.value);
   String? username = PreferenceManager().getString("username");
   print("Username = $username");
 
@@ -21,12 +26,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Tasky',
-      theme: darkTheme,
-
-      home: username == null ? WelcomeScreen() : MainScreen(),
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeNotifire,
+      builder: (BuildContext context, ThemeMode value, Widget? child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Tasky',
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: value,
+          home: username == null ? WelcomeScreen() : MainScreen(),
+        );
+      },
     );
   }
 }

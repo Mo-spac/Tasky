@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tasky/core/services/preference_manager.dart';
+import 'package:tasky/main.dart';
 import 'package:tasky/screens/user_details_screen/user_details_screen.dart';
 import 'package:tasky/screens/welcome_screen/welcome_screen.dart';
 
@@ -164,6 +165,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onChanged: (bool value) {
                       setState(() {
                         isDark = value;
+                        if (!isDark) {
+                          themeNotifire.value = ThemeMode.light;
+                        } else {
+                          themeNotifire.value = ThemeMode.dark;
+                        }
                       });
                     },
                   ),
