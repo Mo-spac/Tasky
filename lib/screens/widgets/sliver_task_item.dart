@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/core/wedgits/custom_check_box.dart';
 import 'package:tasky/models/task_model.dart';
 
@@ -34,17 +35,21 @@ class SliverTaskItem extends StatelessWidget {
 
         title: Text(
           taskModel.taskName,
-          style: TextStyle(
-            color: taskModel.isDone ? Color(0xffA0A0A0) : Color(0xffFFFCFC),
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            decoration:
-                taskModel.isDone
-                    ? TextDecoration.lineThrough
-                    : TextDecoration.none,
-            decorationColor: Color(0xffC6C6C6),
-            overflow: TextOverflow.ellipsis,
-          ),
+          style:
+              taskModel.isDone
+                  ? Theme.of(context).textTheme.titleLarge
+                  : Theme.of(context).textTheme.titleMedium,
+          // TextStyle(
+          //   color: taskModel.isDone ? Color(0xffA0A0A0) : Color(0xffFFFCFC),
+          //   fontSize: 16,
+          //   fontWeight: FontWeight.w400,
+          //   decoration:
+          //       taskModel.isDone
+          //           ? TextDecoration.lineThrough
+          //           : TextDecoration.none,
+          //   decorationColor: Color(0xffC6C6C6),
+          //   overflow: TextOverflow.ellipsis,
+          // ),
           maxLines: 1,
         ),
 
@@ -70,7 +75,12 @@ class SliverTaskItem extends StatelessWidget {
           onPressed: () {},
           icon: Icon(
             Icons.more_vert,
-            color: taskModel.isDone ? Color(0xffA0A0A0) : Color(0xffC6C6C6),
+            color:
+                ThemeController.isDark()
+                    ? (taskModel.isDone ? Color(0xffA0A0A0) : Color(0xffC6C6C6))
+                    : (taskModel.isDone
+                        ? Color(0xff6A6A6A)
+                        : Color(0xff3A4640)),
           ),
         ),
       ),

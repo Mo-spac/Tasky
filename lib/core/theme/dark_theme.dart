@@ -101,6 +101,12 @@ ThemeData darkTheme = ThemeData(
       fontWeight: FontWeight.w400,
       color: Colors.white,
     ),
+
+    labelLarge: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w400,
+      color: Colors.white,
+    ),
   ),
 
   inputDecorationTheme: InputDecorationTheme(
@@ -126,4 +132,6 @@ ThemeData darkTheme = ThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     side: BorderSide(color: Color(0xff6E6E6E), width: 2),
   ),
+
+  iconTheme: IconThemeData(color: Color(0xffC6C6C6)),
 );

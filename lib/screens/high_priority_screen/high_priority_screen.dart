@@ -101,7 +101,7 @@ class _HighPriorityScreenState extends State<HighPriorityScreen> {
                   ? Center(
                     child: Text(
                       "No High Priority Tasks",
-                      style: TextStyle(color: Color(0xffFFFCFC), fontSize: 24),
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
                   )
                   : TasksListWidget(

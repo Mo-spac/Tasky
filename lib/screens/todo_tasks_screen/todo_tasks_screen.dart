@@ -94,7 +94,7 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
           padding: const EdgeInsets.symmetric(vertical: 18.0),
           child: Text(
             "To Do Tasks",
-            style: TextStyle(color: Color(0xffFFFCFC), fontSize: 20),
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ),
         Expanded(
@@ -107,7 +107,7 @@ class _TodoTasksScreenState extends State<TodoTasksScreen> {
                   ? Center(
                     child: Text(
                       "No Task Found",
-                      style: TextStyle(color: Color(0xffFFFCFC), fontSize: 24),
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
                   )
                   : TasksListWidget(

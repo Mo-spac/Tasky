@@ -172,11 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Center(
                   child: Text(
                     "No Tasks",
-                    style: TextStyle(
-                      color: Color(0xffFFFCFC),
-                      fontSize: 24,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ),
               )

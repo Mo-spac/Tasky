@@ -94,7 +94,7 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
           padding: const EdgeInsets.symmetric(vertical: 18.0),
           child: Text(
             "Completed Tasks",
-            style: TextStyle(color: Color(0xffFFFCFC), fontSize: 20),
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ),
         Expanded(
@@ -107,7 +107,7 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
                   ? Center(
                     child: Text(
                       "No Task Found",
-                      style: TextStyle(color: Color(0xffFFFCFC), fontSize: 24),
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
                   )
                   : TasksListWidget(
