@@ -46,6 +46,24 @@ ThemeData lightTheme = ThemeData(
       backgroundColor: WidgetStateProperty.all(Color(0xFF15B86C)),
       foregroundColor: WidgetStateProperty.all(Color(0xFFFFFCFC)),
       // minimumSize: WidgetStateProperty.all(Size.fromHeight(40)),
+      textStyle: WidgetStateProperty.all(
+        TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: Color(0xFFFFFCFC),
+        ),
+      ),
+    ),
+  ),
+
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: Color(0xFF15B86C),
+    foregroundColor: Color(0xFFFFFCFC),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+    extendedTextStyle: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: Color(0xFFFFFCFC),
     ),
   ),
 

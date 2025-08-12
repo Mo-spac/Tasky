@@ -136,10 +136,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   fixedSize: Size(MediaQuery.of(context).size.width, 40),
                 ),
                 icon: Icon(Icons.add),
-                label: Text(
-                  "Add Task",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                ),
+                label: Text("Add Task"),
               ),
             ],
           ),

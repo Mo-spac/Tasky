@@ -206,15 +206,8 @@ class _HomeScreenState extends State<HomeScreen> {
               _loadTask();
             }
           },
-          backgroundColor: Color(0xFF15B86C),
-          foregroundColor: Color(0xFFFFFCFC),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          label: Text(
-            "Add New Task",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-          ),
+
+          label: Text("Add New Task"),
           icon: Icon(Icons.add),
         ),
       ),
