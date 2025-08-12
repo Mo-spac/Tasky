@@ -42,16 +42,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return isLoading
         ? Center(child: CircularProgressIndicator(color: Color(0xffFFFCFC)))
         : Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 18.0),
               child: Text(
                 "My Profile",
-                style: TextStyle(
-                  color: Color(0xffFFFCFC),
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
             SizedBox(height: 16),
@@ -74,14 +71,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           width: 45,
                           height: 45,
                           decoration: BoxDecoration(
-                            color: Color(0xff282828),
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
                             borderRadius: BorderRadius.circular(100),
                           ),
-                          child: Icon(
-                            Icons.camera_alt,
-                            size: 26,
-                            color: Color(0xffFFFCFC),
-                          ),
+                          child: Icon(Icons.camera_alt, size: 26),
                         ),
                       ),
                     ],
@@ -90,19 +84,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // if (username != null)
                   Text(
                     username ?? "",
-                    style: TextStyle(
-                      color: Color(0xffFFFCFC),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: Theme.of(context).textTheme.labelSmall,
                   ),
                   Text(
                     motivationQuote ?? "One task at a time. One step closer.",
-                    style: TextStyle(
-                      color: Color(0xffC6C6C6),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ],
               ),
@@ -114,11 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Text(
                   "Profile Info",
-                  style: TextStyle(
-                    color: Color(0xffFFFCFC),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: Theme.of(context).textTheme.labelSmall,
                 ),
                 ListTile(
                   onTap: () async {
@@ -133,34 +115,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     }
                   },
                   contentPadding: EdgeInsets.zero,
-                  leading: SvgPicture.asset("assets/icons/user.svg"),
-                  title: Text(
-                    "User Details",
-                    style: TextStyle(
-                      color: Color(0xffFFFCFC),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                  leading: SvgPicture.asset(
+                    "assets/icons/user.svg",
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.secondary,
+                      BlendMode.srcIn,
                     ),
                   ),
-                  trailing: Icon(Icons.arrow_forward, color: Color(0xffC6C6C6)),
+                  title: Text(
+                    "User Details",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  trailing: Icon(Icons.arrow_forward),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   shape: Border.symmetric(
                     horizontal: BorderSide(
                       width: 0.75,
-                      color: Color(0xffC6C6C6),
+                      color: Theme.of(context).colorScheme.secondary,
                       style: BorderStyle.solid,
                     ),
                   ),
-                  leading: SvgPicture.asset("assets/icons/moon.svg"),
+                  leading: SvgPicture.asset(
+                    "assets/icons/moon.svg",
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.secondary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                   title: Text(
                     "Dark Mode",
-                    style: TextStyle(
-                      color: Color(0xffFFFCFC),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   trailing: ValueListenableBuilder(
                     valueListenable: ThemeController.themeNotifier,
@@ -199,16 +185,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   },
                   contentPadding: EdgeInsets.zero,
-                  leading: SvgPicture.asset("assets/icons/log_out.svg"),
-                  title: Text(
-                    "Log Out",
-                    style: TextStyle(
-                      color: Color(0xffFFFCFC),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                  leading: SvgPicture.asset(
+                    "assets/icons/log_out.svg",
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.secondary,
+                      BlendMode.srcIn,
                     ),
                   ),
-                  trailing: Icon(Icons.arrow_forward, color: Color(0xffC6C6C6)),
+                  title: Text(
+                    "Log Out",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  trailing: Icon(Icons.arrow_forward),
                 ),
               ],
             ),

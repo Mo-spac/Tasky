@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,
-  colorScheme: ColorScheme.dark(primaryContainer: Color(0xff282828)),
+  colorScheme: ColorScheme.dark(
+    primaryContainer: Color(0xff282828),
+    secondary: Color(0xffCFCFCF),
+  ),
   scaffoldBackgroundColor: Color(0xFF181818),
   appBarTheme: AppBarTheme(
     backgroundColor: Color(0xFF181818),
@@ -152,4 +155,14 @@ ThemeData darkTheme = ThemeData(
   ),
 
   iconTheme: IconThemeData(color: Color(0xffC6C6C6)),
+
+  listTileTheme: ListTileThemeData(
+    // titleTextStyle:
+  ),
+  dividerTheme: DividerThemeData(),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: Colors.white,
+    selectionColor: Colors.grey[800],
+    selectionHandleColor: Colors.white,
+  ),
 );

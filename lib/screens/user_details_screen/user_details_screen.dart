@@ -86,10 +86,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(MediaQuery.of(context).size.width, 40),
               ),
-              child: Text(
-                "Save Changes",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-              ),
+              child: Text("Save Changes"),
             ),
           ],
         ),
