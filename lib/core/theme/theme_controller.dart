@@ -26,4 +26,6 @@ class ThemeController {
       await PreferenceManager().setBool("theme", true);
     }
   }
+
+  static bool isDark() => themeNotifier.value == ThemeMode.dark;
 }

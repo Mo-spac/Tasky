@@ -154,11 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "My Tasks",
-                      style: TextStyle(
-                        color: Color(0xffFFFCFC),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: Theme.of(context).textTheme.labelSmall,
                     ),
                   ),
                 ),

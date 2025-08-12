@@ -90,6 +90,12 @@ ThemeData lightTheme = ThemeData(
       overflow: TextOverflow.ellipsis,
     ),
 
+    labelSmall: TextStyle(
+      color: Color(0xff161F1B),
+      fontSize: 20,
+      fontWeight: FontWeight.w400,
+    ),
+
     labelMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w400,
