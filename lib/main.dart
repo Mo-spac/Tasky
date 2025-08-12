@@ -2,21 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:tasky/core/services/preference_manager.dart';
 import 'package:tasky/core/theme/dark_theme.dart';
 import 'package:tasky/core/theme/light_theme.dart';
+import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/screens/main_screen/main_screen.dart';
 import 'package:tasky/screens/welcome_screen/welcome_screen.dart';
 
 // Value Notifire
-ValueNotifier<ThemeMode> themeNotifire = ValueNotifier(ThemeMode.dark);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PreferenceManager().init();
 
-  bool result = PreferenceManager().getBool("theme") ?? true;
-  if (result) {
-    themeNotifire.value = ThemeMode.dark;
-  } else {
-    themeNotifire.value = ThemeMode.light;
-  }
+  ThemeController().init();
 
   String? username = PreferenceManager().getString("username");
   print("Username = $username");
@@ -32,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
-      valueListenable: themeNotifire,
+      valueListenable: ThemeController.themeNotifier,
       builder: (BuildContext context, ThemeMode themeMode, Widget? child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,

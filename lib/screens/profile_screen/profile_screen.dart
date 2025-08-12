@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tasky/core/services/preference_manager.dart';
+import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/main.dart';
 import 'package:tasky/screens/user_details_screen/user_details_screen.dart';
 import 'package:tasky/screens/welcome_screen/welcome_screen.dart';
@@ -16,7 +17,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? username;
   String? motivationQuote;
   bool isLoading = true;
-  bool isDark = true;
+  // bool isDark = true;
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       motivationQuote =
           PreferenceManager().getString("motivationQuote") ??
           "One task at a time. One step closer.";
-      isDark = PreferenceManager().getBool("theme") ?? true;
+      // isDark = PreferenceManager().getBool("theme") ?? true;
       isLoading = false;
     });
   }
@@ -161,18 +162,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  trailing: Switch(
-                    value: isDark,
-                    onChanged: (bool value) async {
-                      setState(() {
-                        isDark = value;
-                        if (!isDark) {
-                          themeNotifire.value = ThemeMode.light;
-                        } else {
-                          themeNotifire.value = ThemeMode.dark;
-                        }
-                      });
-                      await PreferenceManager().setBool("theme", value);
+                  trailing: ValueListenableBuilder(
+                    valueListenable: ThemeController.themeNotifier,
+                    builder: (BuildContext context, value, Widget? child) {
+                      return Switch(
+                        value: value == ThemeMode.dark,
+                        onChanged: (bool value) async {
+                          // setState(() {
+                          //   isDark = value;
+                          //   if (!isDark) {
+                          //     themeNotifire.value = ThemeMode.light;
+                          //   } else {
+                          //     themeNotifire.value = ThemeMode.dark;
+                          //   }
+                          // });
+                          // await PreferenceManager().setBool("theme", value);
+
+                          ThemeController.toggleTheme();
+                        },
+                      );
                     },
                   ),
                 ),
