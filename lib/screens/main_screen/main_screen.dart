@@ -6,7 +6,6 @@ import 'package:tasky/screens/complete_tasks_screen/complete_tasks_screen.dart';
 import 'package:tasky/screens/home_screen/home_screen.dart';
 import 'package:tasky/screens/profile_screen/profile_screen.dart';
 import 'package:tasky/screens/todo_tasks_screen/todo_tasks_screen.dart';
-import 'package:tasky/screens/widgets/custom_svg_picture.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -36,51 +35,26 @@ class _MainScreenState extends State<MainScreen> {
             _currentIndex = index ?? 0;
           });
         },
-        backgroundColor: Color(0xFF181818),
-        type: BottomNavigationBarType.fixed,
-        unselectedItemColor: Color(0xffC6C6C6),
-        selectedItemColor: Color(0xff15B86C),
+
         items: [
           BottomNavigationBarItem(
-            icon:
-            // CustomSvgPicture(path: "assets/icons/home.svg"),
-            SvgPicture.asset(
-              "assets/icons/home.svg",
-              colorFilter: ColorFilter.mode(
-                _currentIndex == 0 ? Color(0xff15B86C) : Color(0xffC6C6C6),
-                BlendMode.srcIn,
-              ),
-            ),
+            icon: _buildSvgPicture(path: "assets/icons/home.svg", index: 0),
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              "assets/icons/todo.svg",
-              colorFilter: ColorFilter.mode(
-                _currentIndex == 1 ? Color(0xff15B86C) : Color(0xffC6C6C6),
-                BlendMode.srcIn,
-              ),
-            ),
+            icon: _buildSvgPicture(path: "assets/icons/todo.svg", index: 1),
             label: "ToDo",
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              "assets/icons/completed.svg",
-              colorFilter: ColorFilter.mode(
-                _currentIndex == 2 ? Color(0xff15B86C) : Color(0xffC6C6C6),
-                BlendMode.srcIn,
-              ),
+            icon: _buildSvgPicture(
+              path: "assets/icons/completed.svg",
+              index: 2,
             ),
+
             label: "completed",
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              "assets/icons/profile.svg",
-              colorFilter: ColorFilter.mode(
-                _currentIndex == 3 ? Color(0xff15B86C) : Color(0xffC6C6C6),
-                BlendMode.srcIn,
-              ),
-            ),
+            icon: _buildSvgPicture(path: "assets/icons/profile.svg", index: 3),
             label: "profile",
           ),
         ],
@@ -90,6 +64,16 @@ class _MainScreenState extends State<MainScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: screens[_currentIndex],
         ),
+      ),
+    );
+  }
+
+  SvgPicture _buildSvgPicture({required String path, required int index}) {
+    return SvgPicture.asset(
+      path,
+      colorFilter: ColorFilter.mode(
+        _currentIndex == index ? Color(0xff15B86C) : Color(0xffC6C6C6),
+        BlendMode.srcIn,
       ),
     );
   }

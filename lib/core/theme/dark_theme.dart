@@ -165,4 +165,12 @@ ThemeData darkTheme = ThemeData(
     selectionColor: Colors.grey[800],
     selectionHandleColor: Colors.white,
   ),
+
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: Color(0xFF181818),
+    type: BottomNavigationBarType.fixed,
+    unselectedItemColor: Color(0xffC6C6C6),
+    selectedItemColor: Color(0xff15B86C),
+  ),
+  splashFactory: NoSplash.splashFactory,
 );
