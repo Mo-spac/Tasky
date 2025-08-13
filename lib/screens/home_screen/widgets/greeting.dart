@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:tasky/screens/widgets/custom_svg_picture.dart';
 
 class Greeting extends StatelessWidget {
   const Greeting({super.key, required this.username});
@@ -26,7 +26,9 @@ class Greeting extends StatelessWidget {
             "One task at a time.One step closer.",
             style: Theme.of(context).textTheme.titleSmall,
           ),
-          trailing: SvgPicture.asset("assets/icons/Light.svg"),
+          trailing: CustomSvgPicture.withoutColor(
+            path: "assets/icons/Light.svg",
+          ),
         ),
         SizedBox(height: 16),
         Align(
@@ -42,8 +44,8 @@ class Greeting extends StatelessWidget {
               "almost done ! ",
               style: Theme.of(context).textTheme.displayLarge,
             ),
-            SvgPicture.asset(
-              "assets/icons/waving-hand-medium-light-skin-tone.svg",
+            CustomSvgPicture.withoutColor(
+              path: "assets/icons/waving-hand-medium-light-skin-tone.svg",
             ),
           ],
         ),

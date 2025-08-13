@@ -4,6 +4,7 @@ import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/core/wedgits/custom_check_box.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/high_priority_screen/high_priority_screen.dart';
+import 'package:tasky/screens/widgets/custom_svg_picture.dart';
 
 class HighPriorityTasksWidget extends StatelessWidget {
   const HighPriorityTasksWidget({
@@ -131,17 +132,22 @@ class HighPriorityTasksWidget extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: Color(0xff6E6E6E)),
                 ),
-                child: SvgPicture.asset(
-                  "assets/icons/arrow-up-right.svg",
+                child: CustomSvgPicture(
+                  path: "assets/icons/arrow-up-right.svg",
                   height: 24,
                   width: 24,
-                  colorFilter: ColorFilter.mode(
-                    ThemeController.isDark()
-                        ? Color(0xff6E6E6E)
-                        : Color(0xffD1DAD6),
-                    BlendMode.srcIn,
-                  ),
                 ),
+                // SvgPicture.asset(
+                //   "assets/icons/arrow-up-right.svg",
+                //   height: 24,
+                //   width: 24,
+                //   colorFilter: ColorFilter.mode(
+                //     ThemeController.isDark()
+                //         ? Color(0xff6E6E6E)
+                //         : Color(0xffD1DAD6),
+                //     BlendMode.srcIn,
+                //   ),
+                // ),
               ),
             ),
           ),

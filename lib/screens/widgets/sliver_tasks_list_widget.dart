@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tasky/core/wedgits/custom_check_box.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/screens/widgets/sliver_task_item.dart';
 

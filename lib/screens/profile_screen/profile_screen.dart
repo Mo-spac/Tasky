@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tasky/core/services/preference_manager.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
-import 'package:tasky/main.dart';
 import 'package:tasky/screens/user_details_screen/user_details_screen.dart';
 import 'package:tasky/screens/welcome_screen/welcome_screen.dart';
+import 'package:tasky/screens/widgets/custom_svg_picture.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -93,6 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
+
             SizedBox(height: 24),
 
             Column(
@@ -115,13 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     }
                   },
                   contentPadding: EdgeInsets.zero,
-                  leading: SvgPicture.asset(
-                    "assets/icons/user.svg",
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.secondary,
-                      BlendMode.srcIn,
-                    ),
-                  ),
+                  leading: CustomSvgPicture(path: "assets/icons/user.svg"),
                   title: Text(
                     "User Details",
                     style: Theme.of(context).textTheme.titleMedium,
@@ -137,13 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  leading: SvgPicture.asset(
-                    "assets/icons/moon.svg",
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.secondary,
-                      BlendMode.srcIn,
-                    ),
-                  ),
+                  leading: CustomSvgPicture(path: "assets/icons/moon.svg"),
                   title: Text(
                     "Dark Mode",
                     style: Theme.of(context).textTheme.titleMedium,
@@ -185,13 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   },
                   contentPadding: EdgeInsets.zero,
-                  leading: SvgPicture.asset(
-                    "assets/icons/log_out.svg",
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.secondary,
-                      BlendMode.srcIn,
-                    ),
-                  ),
+                  leading: CustomSvgPicture(path: "assets/icons/log_out.svg"),
                   title: Text(
                     "Log Out",
                     style: Theme.of(context).textTheme.titleMedium,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:tasky/screens/widgets/custom_svg_picture.dart';
 
 class WelcomeSection extends StatelessWidget {
   const WelcomeSection({super.key});
@@ -17,8 +17,8 @@ class WelcomeSection extends StatelessWidget {
                 "Welcome To Tasky ",
                 style: Theme.of(context).textTheme.displaySmall,
               ),
-              SvgPicture.asset(
-                "assets/icons/waving-hand-medium-light-skin-tone.svg",
+              CustomSvgPicture.withoutColor(
+                path: "assets/icons/waving-hand-medium-light-skin-tone.svg",
                 height: 28,
                 width: 28,
               ),
@@ -32,7 +32,11 @@ class WelcomeSection extends StatelessWidget {
             ).textTheme.displaySmall!.copyWith(fontSize: 16),
           ),
           SizedBox(height: 24),
-          SvgPicture.asset("assets/images/pana.svg", width: 215, height: 215),
+          CustomSvgPicture.withoutColor(
+            path: "assets/images/pana.svg",
+            width: 215,
+            height: 215,
+          ),
         ],
       ),
     );

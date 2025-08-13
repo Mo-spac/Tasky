@@ -6,6 +6,7 @@ import 'package:tasky/screens/complete_tasks_screen/complete_tasks_screen.dart';
 import 'package:tasky/screens/home_screen/home_screen.dart';
 import 'package:tasky/screens/profile_screen/profile_screen.dart';
 import 'package:tasky/screens/todo_tasks_screen/todo_tasks_screen.dart';
+import 'package:tasky/screens/widgets/custom_svg_picture.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -41,7 +42,9 @@ class _MainScreenState extends State<MainScreen> {
         selectedItemColor: Color(0xff15B86C),
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(
+            icon:
+            // CustomSvgPicture(path: "assets/icons/home.svg"),
+            SvgPicture.asset(
               "assets/icons/home.svg",
               colorFilter: ColorFilter.mode(
                 _currentIndex == 0 ? Color(0xff15B86C) : Color(0xffC6C6C6),

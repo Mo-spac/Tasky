@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/core/wedgits/custom_check_box.dart';
