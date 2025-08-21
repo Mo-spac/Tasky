@@ -69,8 +69,14 @@ class SliverTaskItem extends StatelessWidget {
                   maxLines: 2,
                 )
                 : null,
-        trailing: IconButton(
-          onPressed: () {},
+        trailing: PopupMenuButton(
+          onSelected: (value) {
+            if (value == "Edit") {
+              print("Edit");
+            } else if (value == "Delet") {
+              print("Delet");
+            }
+          },
           icon: Icon(
             Icons.more_vert,
             color:
@@ -80,7 +86,25 @@ class SliverTaskItem extends StatelessWidget {
                         ? Color(0xff6A6A6A)
                         : Color(0xff3A4640)),
           ),
+          itemBuilder:
+              (context) => [
+                PopupMenuItem(value: "Edit", child: Text("Edit")),
+                PopupMenuItem(value: "Delete", child: Text("Delete")),
+              ],
         ),
+
+        // IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(
+        //     Icons.more_vert,
+        //     color:
+        //         ThemeController.isDark()
+        //             ? (taskModel.isDone ? Color(0xffA0A0A0) : Color(0xffC6C6C6))
+        //             : (taskModel.isDone
+        //                 ? Color(0xff6A6A6A)
+        //                 : Color(0xff3A4640)),
+        //   ),
+        // ),
       ),
     );
   }

@@ -173,4 +173,17 @@ ThemeData darkTheme = ThemeData(
     selectedItemColor: Color(0xff15B86C),
   ),
   splashFactory: NoSplash.splashFactory,
+
+  popupMenuTheme: PopupMenuThemeData(
+    color: Color(0xFF181818),
+    shape: RoundedRectangleBorder(
+      side: BorderSide(color: Color(0xff15B86C), width: 1),
+      borderRadius: BorderRadiusGeometry.circular(16),
+    ),
+    elevation: 2,
+    shadowColor: Color(0xff15B86C),
+    labelTextStyle: WidgetStateProperty.all(
+      TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+    ),
+  ),
 );

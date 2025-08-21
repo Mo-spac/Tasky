@@ -178,4 +178,13 @@ ThemeData lightTheme = ThemeData(
     selectedItemColor: Color(0xff14A662),
   ),
   splashFactory: NoSplash.splashFactory,
+
+  popupMenuTheme: PopupMenuThemeData(
+    color: Color(0xffF6F7F9),
+    elevation: 2,
+    shadowColor: Color(0xff15B86C),
+    labelTextStyle: WidgetStateProperty.all(
+      TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
+    ),
+  ),
 );
