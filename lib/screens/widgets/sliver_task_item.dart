@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/core/enum/task_item_actions_enum.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/core/wedgits/custom_check_box.dart';
 import 'package:tasky/models/task_model.dart';
@@ -69,12 +70,17 @@ class SliverTaskItem extends StatelessWidget {
                   maxLines: 2,
                 )
                 : null,
-        trailing: PopupMenuButton(
+        trailing: PopupMenuButton<TaskItemActionsEnum>(
           onSelected: (value) {
-            if (value == "Edit") {
-              print("Edit");
-            } else if (value == "Delet") {
-              print("Delet");
+            switch (value) {
+              case TaskItemActionsEnum.markAsDone:
+                print(value.name);
+
+              case TaskItemActionsEnum.edit:
+                print(value.name);
+
+              case TaskItemActionsEnum.delete:
+                print(TaskItemActionsEnum.delete.name);
             }
           },
           icon: Icon(
@@ -87,24 +93,14 @@ class SliverTaskItem extends StatelessWidget {
                         : Color(0xff3A4640)),
           ),
           itemBuilder:
-              (context) => [
-                PopupMenuItem(value: "Edit", child: Text("Edit")),
-                PopupMenuItem(value: "Delete", child: Text("Delete")),
-              ],
+              (context) =>
+                  TaskItemActionsEnum.values.map((e) {
+                    return PopupMenuItem<TaskItemActionsEnum>(
+                      value: e,
+                      child: Text(e.name),
+                    );
+                  }).toList(),
         ),
-
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: Icon(
-        //     Icons.more_vert,
-        //     color:
-        //         ThemeController.isDark()
-        //             ? (taskModel.isDone ? Color(0xffA0A0A0) : Color(0xffC6C6C6))
-        //             : (taskModel.isDone
-        //                 ? Color(0xff6A6A6A)
-        //                 : Color(0xff3A4640)),
-        //   ),
-        // ),
       ),
     );
   }
